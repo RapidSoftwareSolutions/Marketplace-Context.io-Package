@@ -168,7 +168,7 @@ List all messages in the account (including all sources associated with the acco
 | from             | String     | Email address of a contact messages have been received from.
 | emailOfContactCC | String     | Email address of a contact CC'ed on the messages.
 | emailOfContactBCC| String     | Email address of a contact BCC'ed on the messages.
-| folder           | String     | Filter messages by the folder (or Gmail label).See more in readme.
+| folder           | String     | Filter messages by the folder (or Gmail label).This parameter can be the complete folder name with the appropriate hierarchy delimiter for the mail server being queried (eg. Inbox/My folder) or the “symbolic name” of the folder (eg. \Starred). The symbolic name refers to attributes used to refer to special use folders in a language-independent way. See RFC-6154.
 | source           | String     | Filter messages by the account source label.
 | fileName         | String     | Search for files based on their name. You can filter names using typical shell wildcards such as *, ? and [] or regular expressions by enclosing the search expression in a leading / and trailing /. For example, *.pdf would give you all PDF files while /.jpe?g$/ would return all files whose name ends with .jpg or .jpeg
 | fileSizeMin      | Number     | Search for files based on their size (in bytes).
