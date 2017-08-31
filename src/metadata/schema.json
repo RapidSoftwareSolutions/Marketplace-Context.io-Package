@@ -1,0 +1,4525 @@
+{
+    "package": "Context.io",
+    "tagline": "Context.io API",
+    "description": "Context.IO is a modern, scalable email API that brings IMAP into the 21st century.Enrich your application with email data: contacts, attachments, receipts, reservations, travel information, and much more.Context.IO can connect to any IMAP enabled email including Gmail, Google Apps, Outlook, Yahoo, AOL, and more.Get near real-time notifications for new and sent messages via webhooks. We offer rich filtering features to ensure you only get the data you need.Context.IO is free to use for most cases, but we offer flexible pricing tiers for companies of any size.",
+    "image": "https:\/\/logo.clearbit.com\/context.io",
+    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-Context.io-Package",
+    "keywords": [
+        "API",
+        "Email",
+        "Sync",
+        "IMAP",
+        "Messages",
+        "Integration"
+    ],
+    "accounts": {
+        "domain": "context.com",
+        "credentials": [
+            "consumerKey",
+            "consumerSecret"
+        ]
+    },
+    "events": [
+        {
+            "name": "webhookEvent",
+            "description": "The Todoist Webhooks API allows applications to receive real-time notification (in the form of HTTP POST payload) on the subscribed user events. Notice that once you have a webhook setup, you will start receiving webhook events from all your app users immediately.",
+            "payload": {
+                "callback_url": "https:\/\/your-callback.com",
+                "failure_notif_url": "https:\/\/your-callback.com",
+                "active": true,
+                "webhook_id": "55555ddddd66666eeeee7777",
+                "resource_url": "https:\/\/api.context.io\/2.0\/..."
+            },
+            "steps": [
+                "Use createUserLevelWebhook or createApplicationLevelWebhook endpoints and set callback to __WEBHOOK_URL__ for your account."
+            ],
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "type": "String",
+                    "info": "The consumer key from your account.",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "blocks": [
+        {
+            "name": "createAccount",
+            "description": "You can create an account with no source by only passing in the email param. If you choose this option, you will need to add a source later.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "The primary email address used to receive emails in this account.",
+                    "required": true
+                },
+                {
+                    "name": "firstName",
+                    "vendorName": "first_name",
+                    "type": "String",
+                    "info": "First name of the account holder.",
+                    "required": false
+                },
+                {
+                    "name": "lastName",
+                    "vendorName": "last_name",
+                    "type": "String",
+                    "info": "Last name of the account holder.",
+                    "required": false
+                },
+                {
+                    "name": "syncAllFolders",
+                    "vendorName": "sync_all_folders",
+                    "type": "Select",
+                    "options": [
+                        "off"
+                    ],
+                    "info": "By default, we filter out some folders like \u2018Deleted Items\u2019 and 'Drafts\u2019. Set this parameter to `off` to turn off this filtering and show every single folder.",
+                    "required": false
+                },
+                {
+                    "name": "expungeOnDeletedFlag",
+                    "vendorName": "expunge_on_deleted_flag",
+                    "type": "Select",
+                    "options": [
+                        "on"
+                    ],
+                    "info": "By default, we don\u2019t filter out messages flagged as deleted. Set this parameter to `on` to turn on this filtering.",
+                    "required": false
+                },
+                {
+                    "name": "callbackUrl",
+                    "vendorName": "callback_url",
+                    "type": "String",
+                    "info": "If specified, we\u2019ll make a POST request to this URL when the initial sync is completed. ",
+                    "required": false
+                },
+                {
+                    "name": "statusCallbackUrl",
+                    "vendorName": "status_callback_url",
+                    "type": "String",
+                    "info": "If specified, we\u2019ll make a POST request to this URL if the connection status of the source changes. ",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "email",
+                            "first_name",
+                            "last_name",
+                            "sync_all_folders",
+                            "expunge_on_deleted_flag",
+                            "callback_url",
+                            "status_callback_url"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createSources",
+            "description": "Use this endpoint to add a source to an existing account. An account id is required to add a source to an existing account.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "The primary email address used to receive emails in this account.",
+                    "required": true
+                },
+                {
+                    "name": "username",
+                    "type": "String",
+                    "info": "The username used to authenticate an IMAP connection. On some servers, this is the same thing as the primary email address.",
+                    "required": true
+                },
+                {
+                    "name": "server",
+                    "type": "String",
+                    "info": "Name of IP of the IMAP server, eg. imap.gmail.com.",
+                    "required": true
+                },
+                {
+                    "name": "useSsl",
+                    "vendorName": "use_ssl",
+                    "type": "Number",
+                    "info": "Set to 1 if you want SSL encryption to be used when opening connections to the IMAP server. Any other value will be considered as \u201cdo not use SSL\u201d.",
+                    "required": true
+                },
+                {
+                    "name": "port",
+                    "type": "Number",
+                    "info": "Port number to connect to on the server. For most servers, SSL is 993, and unencrypted (non-SSL) is 143. ",
+                    "required": true
+                },
+                {
+                    "name": "type",
+                    "type": "Select",
+                    "options": [
+                        "IMAP"
+                    ],
+                    "info": "Currently, the only supported type is IMAP.",
+                    "required": true
+                },
+                {
+                    "name": "originIp",
+                    "vendorName": "origin_ip",
+                    "type": "String",
+                    "info": "IP address of the end user requesting the account to be created",
+                    "required": false
+                },
+                {
+                    "name": "syncAllFolders",
+                    "vendorName": "sync_all_folders",
+                    "type": "Select",
+                    "options": [
+                        "off"
+                    ],
+                    "info": "By default, we filter out some folders like \u2018Deleted Items\u2019 and 'Drafts\u2019. Set this parameter to `off` to turn off this filtering and show every single folder.",
+                    "required": false
+                },
+                {
+                    "name": "expungeOnDeletedFlag",
+                    "vendorName": "expunge_on_deleted_flag",
+                    "type": "Select",
+                    "options": [
+                        "on"
+                    ],
+                    "info": "By default, we don\u2019t filter out messages flagged as deleted. Set this parameter to `on` to turn on this filtering.",
+                    "required": false
+                },
+                {
+                    "name": "password",
+                    "type": "String",
+                    "info": "Password for this source. Required when creating a source and account in a single call. Ignored if any of the provider_* parameters are set below.",
+                    "required": false
+                },
+                {
+                    "name": "providerRefreshToken",
+                    "vendorName": "provider_refresh_token",
+                    "type": "String",
+                    "info": "An OAuth2 refresh token obtained from the IMAP account provider to authenticate this email account. Required if using oauth when creating a source and account in a single call.",
+                    "required": false
+                },
+                {
+                    "name": "providerConsumerKey",
+                    "vendorName": "provider_consumer_key",
+                    "type": "String",
+                    "info": "The OAuth2 Client ID used to obtain the the refresh token for the above account. Required if using oauth when creating a source and account in a single call. ",
+                    "required": false
+                },
+                {
+                    "name": "callbackUrl",
+                    "vendorName": "callback_url",
+                    "type": "String",
+                    "info": "If specified, we\u2019ll make a POST request to this URL when the initial sync is completed. ",
+                    "required": false
+                },
+                {
+                    "name": "statusCallbackUrl",
+                    "vendorName": "status_callback_url",
+                    "type": "String",
+                    "info": "If specified, we\u2019ll make a POST request to this URL if the connection status of the source changes. ",
+                    "required": false
+                },
+                {
+                    "name": "rawFileList",
+                    "vendorName": "raw_file_list",
+                    "type": "Select",
+                    "options": [
+                        "off"
+                    ],
+                    "info": "By default, we filter out files like signature images or those winmail.dat files form the files list. Set this parameter to `off` to turn off this filtering and show every single file attachments.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/sources",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "email",
+                            "server",
+                            "username",
+                            "use_ssl",
+                            "port",
+                            "type",
+                            "sync_all_folders",
+                            "expunge_on_deleted_flag",
+                            "provider_refresh_token",
+                            "password",
+                            "provider_consumer_key",
+                            "callback_url",
+                            "status_callback_url",
+                            "origin_ip",
+                            "raw_file_list"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteAccount",
+            "description": "If you need to delete an account, you can do so by using this endpoint. This will delete the account and all sources associated with it.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/",
+            "request": {
+                "method": "delete",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteSource",
+            "description": "If you wish to only delete a certain source from the account, but not delete the account itself.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "label",
+                    "type": "String",
+                    "info": "The label property of the source instance. You can use 0 as an alias for the first source of an account.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/{$data['label']}",
+            "request": {
+                "method": "delete",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "label"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "connectTokensWizard",
+            "description": "Connect tokens are a feature we provide to facilitate account creation.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "callbackUrl",
+                    "vendorName": "callback_url",
+                    "type": "String",
+                    "info": "When the user\u2019s mailbox is connected to your API key, the browser will call this url (GET). This call will have a parameter called contextio_token indicating the connect_token related to this callback. You can then do a get on this connect_token to obtain details about the account and source created through that token and save that account id in your own user data.",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "The email address of the account to be added. If specified, the first step of the connect UI where users are prompted for their email address, first name and last name is skipped.",
+                    "required": false
+                },
+                {
+                    "name": "firstName",
+                    "vendorName": "first_name",
+                    "type": "String",
+                    "info": "First name of the account holder.",
+                    "required": false
+                },
+                {
+                    "name": "lastName",
+                    "vendorName": "last_name",
+                    "type": "String",
+                    "info": "Last name of the account holder.",
+                    "required": false
+                },
+                {
+                    "name": "sourceCallbackUrl",
+                    "vendorName": "source_callback_url",
+                    "type": "String",
+                    "info": "If specified, we\u2019ll make a POST request to this URL when the initial sync is completed.",
+                    "required": false
+                },
+                {
+                    "name": "sourceExpungeOnDeletedFlag",
+                    "vendorName": "source_expunge_on_deleted_flag",
+                    "type": "Select",
+                    "options": [
+                        "on"
+                    ],
+                    "info": "By default, we don\u2019t filter out messages flagged as deleted. Set this parameter to `on` to turn on this filtering.",
+                    "required": false
+                },
+                {
+                    "name": "sourceSyncAllFolders",
+                    "vendorName": "source_sync_all_folders",
+                    "type": "Select",
+                    "options": [
+                        "off"
+                    ],
+                    "info": "By default, we filter out some folders like \u2018Deleted Items\u2019 and 'Drafts\u2019. Set this parameter to `off` to turn off this filtering and show every single folder.",
+                    "required": false
+                },
+                {
+                    "name": "sourceSyncFolders",
+                    "vendorName": "source_sync_folders",
+                    "type": "Select",
+                    "options": [
+                        "All",
+                        "Trash"
+                    ],
+                    "info": "By default, we filter out some folders like 'Deleted Items\u2019 and 'Drafts\u2019. Set this parameter to `All`,`Trash` to show the 'Deleted Items\u2019 folder.",
+                    "required": false
+                },
+                {
+                    "name": "sourceRawFileList",
+                    "vendorName": "source_raw_file_list",
+                    "type": "Select",
+                    "options": [
+                        "off"
+                    ],
+                    "info": "By default, we filter out files like signature images or those winmail.dat files form the files list. Set this parameter to 1 to turn off this filtering and show every single file attachments.",
+                    "required": false
+                },
+                {
+                    "name": "statusCallbackUrl",
+                    "vendorName": "status_callback_url",
+                    "type": "String",
+                    "info": "If specified, we\u2019ll make a POST request to this URL if the connection status of the source changes. ",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/connect_tokens",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "callback_url",
+                            "email",
+                            "first_name",
+                            "last_name",
+                            "source_callback_url",
+                            "source_expunge_on_deleted_flag",
+                            "source_sync_all_folders",
+                            "source_sync_folders",
+                            "source_raw_file_list",
+                            "status_callback_url"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getConnectTokenDetails",
+            "description": "Getting data about connect token will tell you:If the connect token was used;It not used, you will see when it will expire;If the connect token was used, you will see data about which source was added with the connect token;",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "token",
+                    "type": "String",
+                    "info": "The unique random token used to add a second source to an existing account.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/connect_tokens\/{$data['token']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllConnectTokensForAccount",
+            "description": "Use this call to list all connect tokens associated with an account (used or unused).",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/connect_tokens\/",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllConnectTokensForSource",
+            "description": "Use this call to list all connect tokens associated with a source (used or unused).",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "label",
+                    "type": "String",
+                    "info": "The label property of the source instance.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/sources\/{$data['label']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "label"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAccountDetails",
+            "description": "Getting details at the account level will give you:Account creation date;List all sources linked to the account;Number of messages currently in the mailbox;",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllSources",
+            "description": "If the account has more than once source, this endpoint will list all sources associated with the account. Optional parameters will allow you to filter by source status.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "status",
+                    "type": "Select",
+                    "options": [
+                        "INVALID_CREDENTIALS",
+                        "CONNECTION_IMPOSSIBLE",
+                        "OK",
+                        "TEMP_DISABLED",
+                        "DISABLED"
+                    ],
+                    "info": "Only return sources whose status is of a specific value.",
+                    "required": false
+                },
+                {
+                    "name": "statusOk",
+                    "vendorName": "status_ok",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Set to `false` to get sources that are not working correctly. Set to `true` to get those that are.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/sources",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "status",
+                            "status_ok"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSourceDetail",
+            "description": "The name of a source in Context.IO is called a \u201clabel\u201d. The label will be included in the response when you get account or source details and looks something like `email::provider`.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "label",
+                    "type": "String",
+                    "info": "The label property of the source instance.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/sources\/{$data['label']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "label"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllMessages",
+            "description": "List all messages in the account (including all sources associated with the account). This call hits our cache of metadata for the account, so this call should be faster than hitting IMAP.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "subject",
+                    "type": "String",
+                    "info": "Get messages whose subject matches this search string. To use regular expressions instead of simple string matching, make sure the string starts and ends with \/.",
+                    "required": false
+                },
+                {
+                    "name": "emails",
+                    "vendorName": "email",
+                    "type": "List",
+                    "structure": {
+                        "name": "singleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Email address(es) or top level domain of the contact for whom you want the latest messages exchanged with. By \u201cexchanged with contact X\u201d we mean any email received from contact X, sent to contact X or sent by anyone to both contact X and the source owner. This accepts a single address or a comma separated list.",
+                    "required": false
+                },
+                {
+                    "name": "to",
+                    "type": "String",
+                    "info": "Email address of a contact messages have been sent to.",
+                    "required": false
+                },
+                {
+                    "name": "from",
+                    "type": "String",
+                    "info": "Email address of a contact messages have been received from.",
+                    "required": false
+                },
+                {
+                    "name": "emailOfContactCC",
+                    "vendorName": "cc",
+                    "type": "String",
+                    "info": "Email address of a contact CC'ed on the messages.",
+                    "required": false
+                },
+                {
+                    "name": "emailOfContactBCC",
+                    "vendorName": "bcc",
+                    "type": "String",
+                    "info": "Email address of a contact BCC'ed on the messages.",
+                    "required": false
+                },
+                {
+                    "name": "folder",
+                    "type": "String",
+                    "info": "Filter messages by the folder (or Gmail label).See more in readme.",
+                    "required": false
+                },
+                {
+                    "name": "source",
+                    "type": "String",
+                    "info": "Filter messages by the account source label.",
+                    "required": false
+                },
+                {
+                    "name": "fileName",
+                    "vendorName": "file_name",
+                    "type": "String",
+                    "info": "Search for files based on their name. You can filter names using typical shell wildcards such as *, ? and [] or regular expressions by enclosing the search expression in a leading \/ and trailing \/. For example, *.pdf would give you all PDF files while \/.jpe?g$\/ would return all files whose name ends with .jpg or .jpeg",
+                    "required": false
+                },
+                {
+                    "name": "fileSizeMin",
+                    "vendorName": "file_size_min",
+                    "type": "Number",
+                    "info": "Search for files based on their size (in bytes).",
+                    "required": false
+                },
+                {
+                    "name": "fileSizeMax",
+                    "vendorName": "file_size_max",
+                    "type": "Number",
+                    "info": "Search for files based on their size (in bytes).",
+                    "required": false
+                },
+                {
+                    "name": "dateBefore",
+                    "vendorName": "date_before",
+                    "type": "DatePicker",
+                    "info": "Only include messages before a given timestamp. The value this filter is applied to is the Date: header of the message which refers to the time the message is sent from the origin.",
+                    "required": false
+                },
+                {
+                    "name": "dateAfter",
+                    "vendorName": "date_after",
+                    "type": "DatePicker",
+                    "info": "Only include messages after a given timestamp. The value this filter is applied to is the Date: header of the message which refers to the time the message is sent from the origin.",
+                    "required": false
+                },
+                {
+                    "name": "indexedBefore",
+                    "vendorName": "indexed_before",
+                    "type": "DatePicker",
+                    "info": "Only include messages indexed before a given timestamp. This is not the same as the date of the email, it is the time Context.IO indexed this message.",
+                    "required": false
+                },
+                {
+                    "name": "indexedAfter",
+                    "vendorName": "indexed_after",
+                    "type": "DatePicker",
+                    "info": "Only include messages indexed after a given timestamp. This is not the same as the date of the email, it is the time Context.IO indexed this message.",
+                    "required": false
+                },
+                {
+                    "name": "includeThreadSize",
+                    "vendorName": "include_thread_size",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to include thread size in the result.",
+                    "required": false
+                },
+                {
+                    "name": "includeBody",
+                    "vendorName": "include_body",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to include message bodies in the result. Since message bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "includeHeaders",
+                    "vendorName": "include_headers",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Can be set to `false` (default), `true` or raw. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "includeFlags",
+                    "vendorName": "include_flags",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to include thread size in the result.",
+                    "required": false
+                },
+                {
+                    "name": "bodyType",
+                    "vendorName": "body_type",
+                    "type": "String",
+                    "info": "Used when includeBody is set to get only body parts of a given MIME-type (for example text\/html).",
+                    "required": false
+                },
+                {
+                    "name": "includeSource",
+                    "vendorName": "include_source",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to 1 to include message sources in the result. Since message sources must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "sortOrder",
+                    "vendorName": "sort_order",
+                    "type": "Select",
+                    "options": [
+                        "asc",
+                        "desc"
+                    ],
+                    "info": "The sort order of the returned results.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.",
+                    "required": false
+                },
+                {
+                    "name": "offset",
+                    "type": "Number",
+                    "info": "Start the list at this offset (zero-based).",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/messages",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "subject",
+                            "email",
+                            "to",
+                            "from",
+                            "cc",
+                            "bcc",
+                            "folder",
+                            "source",
+                            "file_name",
+                            "file_size_min",
+                            "file_size_max",
+                            "date_before",
+                            "date_after",
+                            "indexed_before",
+                            "indexed_after",
+                            "include_thread_size",
+                            "include_body",
+                            "include_headers",
+                            "include_flags",
+                            "body_type",
+                            "include_source",
+                            "sort_order",
+                            "limit",
+                            "offset"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getMessage",
+            "description": "Get an individual message based on a `messageId`. You can use either a `messageId` or `emailMessageId`",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "vendorName": "message_id",
+                    "type": "String",
+                    "info": "Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.",
+                    "required": true
+                },
+                {
+                    "name": "includeThreadSize",
+                    "vendorName": "include_thread_size",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to include thread size in the result.",
+                    "required": false
+                },
+                {
+                    "name": "includeBody",
+                    "vendorName": "include_body",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to include message bodies in the result. Since message bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "includeHeaders",
+                    "vendorName": "include_headers",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Can be set to `false` (default), `true` or raw. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "includeFlags",
+                    "vendorName": "include_flags",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to include thread size in the result.",
+                    "required": false
+                },
+                {
+                    "name": "bodyType",
+                    "vendorName": "body_type",
+                    "type": "String",
+                    "info": "Used when includeBody is set to get only body parts of a given MIME-type (for example text\/html).",
+                    "required": false
+                },
+                {
+                    "name": "includeSource",
+                    "vendorName": "include_source",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to 1 to include message sources in the result. Since message sources must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/messages\/{$data['message_id']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "message_id",
+                            "include_thread_size",
+                            "include_body",
+                            "include_headers",
+                            "include_flags",
+                            "body_type",
+                            "include_source"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getMessageBody",
+            "description": "The name of a source in Context.IO is called a \u201clabel\u201d. The label will be included in the response when you get account or source details and looks something like `email::provider`.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "vendorName": "message_id",
+                    "type": "String",
+                    "info": "Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.",
+                    "required": true
+                },
+                {
+                    "name": "type",
+                    "type": "Select",
+                    "options": [
+                        "text\/plain",
+                        "text\/html"
+                    ],
+                    "info": "Many emails are sent with both rich text and plain text versions in the message body and by default, the response of this call will include both.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/body",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "message_id",
+                            "type"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getMessageFlags",
+            "description": "This call lists all flags currently applied to this message.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "vendorName": "message_id",
+                    "type": "String",
+                    "info": "Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/flags",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "message_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateMessageFlags",
+            "description": "This call will allow you to set or unset flags for a specific message.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "vendorName": "message_id",
+                    "type": "String",
+                    "info": "Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.",
+                    "required": true
+                },
+                {
+                    "name": "seen",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message has been read. Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                },
+                {
+                    "name": "answered",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message has been answered. Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                },
+                {
+                    "name": "flagged",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message is \u201cflagged\u201d for urgent\/special attention. Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                },
+                {
+                    "name": "deleted",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message is `deleted` for later removal. An alternative way of deleting messages is to move it to the Trash folder. Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                },
+                {
+                    "name": "draft",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message has not completed composition (marked as a draft). Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/flags",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "message_id",
+                            "seen",
+                            "answered",
+                            "flagged",
+                            "deleted",
+                            "draft"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getMessageFolders",
+            "description": "This call returns the folder(s) a message appears in.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "vendorName": "message_id",
+                    "type": "String",
+                    "info": "Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/folders",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "message_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getMessageHeaders",
+            "description": "This call returns only the headers for this message. We send a parsed response by default, but you can also choose to get the raw RFC 822 headers.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "vendorName": "message_id",
+                    "type": "String",
+                    "info": "Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.",
+                    "required": true
+                },
+                {
+                    "name": "raw",
+                    "type": "Select",
+                    "options": [
+                        "unparsed"
+                    ],
+                    "info": "By default, this returns messages headers parsed into an array. Set this parameter to `unparsed` to get raw unparsed headers.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/headers",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "message_id",
+                            "raw"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getMessageRawSource",
+            "description": "This endpoint returns the raw RFC 822 source message.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "vendorName": "message_id",
+                    "type": "String",
+                    "info": "Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/source",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "message_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getMessageThread",
+            "description": "This endpoint returns the the entire thread of messages a message is in that Context.IO has access to. Replies in the thread from accounts not in Context.Io would not appear here.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "vendorName": "message_id",
+                    "type": "String",
+                    "info": "Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.",
+                    "required": true
+                },
+                {
+                    "name": "includeBody",
+                    "vendorName": "include_body",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to include message bodies in the result. Since message bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "includeHeaders",
+                    "vendorName": "include_headers",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Can be set to `false` (default), `true` or raw. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "includeFlags",
+                    "vendorName": "include_flags",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to include thread size in the result.",
+                    "required": false
+                },
+                {
+                    "name": "bodyType",
+                    "vendorName": "body_type",
+                    "type": "String",
+                    "info": "Used when includeBody is set to get only body parts of a given MIME-type (for example text\/html).",
+                    "required": false
+                },
+                {
+                    "name": "includeSource",
+                    "vendorName": "include_source",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to 1 to include message sources in the result. Since message sources must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "sortOrder",
+                    "vendorName": "sort_order",
+                    "type": "Select",
+                    "options": [
+                        "asc",
+                        "desc"
+                    ],
+                    "info": "The sort order of the returned results.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.",
+                    "required": false
+                },
+                {
+                    "name": "offset",
+                    "type": "Number",
+                    "info": "Start the list at this offset (zero-based).",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/thread",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "message_id",
+                            "include_body",
+                            "include_headers",
+                            "include_flags",
+                            "body_type",
+                            "include_source",
+                            "sort_order",
+                            "limit",
+                            "offset"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateMessage",
+            "description": "This call allows you to copy or move a message between folders, or also change the message\u2019s flags all at once. If there are more than one source on the account, you can use this call to copy\/move the message between these sources. ",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "vendorName": "message_id",
+                    "type": "String",
+                    "info": "Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.",
+                    "required": true
+                },
+                {
+                    "name": "folderToCopied",
+                    "vendorName": "dst_folder",
+                    "type": "String",
+                    "info": "The folder within dst_source the message should be copied to.",
+                    "required": false
+                },
+                {
+                    "name": "sourceLabel",
+                    "vendorName": "dst_source",
+                    "type": "String",
+                    "info": "Label of the source you want the message copied to. This field is required if you\u2019re moving a message that already exists in one source of the account to another source of that account.If you only want to move the message to a different folder within the same source, folderToCopied is sufficient.",
+                    "required": false
+                },
+                {
+                    "name": "move",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "By default, this calls copies the original message in the destination. Set this parameter to `true` to move instead of copy.",
+                    "required": false
+                },
+                {
+                    "name": "flagSeen",
+                    "vendorName": "flag_seen",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message has been read. Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                },
+                {
+                    "name": "flagAnswered",
+                    "vendorName": "flag_answered",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message has been answered. Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                },
+                {
+                    "name": "flagDeleted",
+                    "vendorName": "flag_deleted",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message is `deleted` for later removal. An alternative way of deleting messages is to move it to the Trash folder. Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                },
+                {
+                    "name": "flagDraft",
+                    "vendorName": "flag_draft",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message has not completed composition (marked as a draft). Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/messages\/{$data['message_id']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "message_id",
+                            "dst_folder",
+                            "dst_source",
+                            "move",
+                            "flag_seen",
+                            "flag_answered",
+                            "flag_deleted",
+                            "flag_draft"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "moveMessage",
+            "description": "This call allows you to move a message between folders, or also change the message\u2019s flags all at once. If there are more than one source on the account, you can use this call to copy\/move the message between these sources. ",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "vendorName": "message_id",
+                    "type": "String",
+                    "info": "Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.",
+                    "required": true
+                },
+                {
+                    "name": "folderToCopied",
+                    "vendorName": "dst_folder",
+                    "type": "String",
+                    "info": "The folder within dst_source the message should be copied to.",
+                    "required": false
+                },
+                {
+                    "name": "sourceLabel",
+                    "vendorName": "dst_source",
+                    "type": "String",
+                    "info": "Label of the source you want the message copied to. This field is required if you\u2019re moving a message that already exists in one source of the account to another source of that account.If you only want to move the message to a different folder within the same source, folderToCopied is sufficient.",
+                    "required": false
+                },
+                {
+                    "name": "flagSeen",
+                    "vendorName": "flag_seen",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message has been read. Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                },
+                {
+                    "name": "flagAnswered",
+                    "vendorName": "flag_answered",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message has been answered. Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                },
+                {
+                    "name": "flagDeleted",
+                    "vendorName": "flag_deleted",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message is `deleted` for later removal. An alternative way of deleting messages is to move it to the Trash folder. Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                },
+                {
+                    "name": "flagDraft",
+                    "vendorName": "flag_draft",
+                    "type": "Select",
+                    "options": [
+                        "set",
+                        "unset"
+                    ],
+                    "info": "Message has not completed composition (marked as a draft). Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/messages\/{$data['message_id']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "message_id",
+                            "dst_folder",
+                            "dst_source",
+                            "move",
+                            "flag_seen",
+                            "flag_answered",
+                            "flag_deleted",
+                            "flag_draft"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllSourceFolders",
+            "description": "List folders for a given source (email address).",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "sourceLabel",
+                    "vendorName": "source",
+                    "type": "String",
+                    "info": "The label property of the source instance. You can use 0 as an alias for the first source of an account.",
+                    "required": true
+                },
+                {
+                    "name": "includeExtendedCounts",
+                    "vendorName": "include_extended_counts",
+                    "type": "Select",
+                    "options": [
+                        "include"
+                    ],
+                    "info": "Set to `include` to include extended counts in the result (for now, the only extended count supported is number of unseen messages). Since counts must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "noCache",
+                    "vendorName": "no_cache",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to fetch the folder list directly from the IMAP server. Since data must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/sources\/{$data['source']}\/folders",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "source",
+                            "include_extended_counts",
+                            "no_cache"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSourceFolder",
+            "description": "Get information about a given folder such as number of messages, number of unseen messages, and other attributes.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "sourceLabel",
+                    "vendorName": "source",
+                    "type": "String",
+                    "info": "The label property of the source instance. You can use 0 as an alias for the first source of an account.",
+                    "required": true
+                },
+                {
+                    "name": "folder",
+                    "type": "String",
+                    "info": "The full folder path using \/ as the path hierarchy delimiter.",
+                    "required": true
+                },
+                {
+                    "name": "delimiter",
+                    "vendorName": "delim",
+                    "type": "String",
+                    "info": "If \/ isn\u2019t fancy enough as a hierarchy delimiter when specifying the folder you want to obtain, you\u2019re free to use what you want, just make sure you set this delim parameter to tell us what you\u2019re using.",
+                    "required": false
+                },
+                {
+                    "name": "includeExtendedCounts",
+                    "vendorName": "include_extended_counts",
+                    "type": "Select",
+                    "options": [
+                        "include"
+                    ],
+                    "info": "Set to `include` to include extended counts in the result (for now, the only extended count supported is number of unseen messages). Since counts must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/sources\/{$data['source']}\/folders\/{$data['folder']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "folder",
+                            "include_extended_counts",
+                            "delim"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createUserLevelWebhook",
+            "description": "Webhooks set at the user level are applicable only to the user on which the webhook is set. User level webhooks should be used for cases when you will be monitoring things that are very specific to each individual user.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "callbackUrl",
+                    "vendorName": "callback_url",
+                    "type": "String",
+                    "info": "A valid URL Context.IO calls when a matching message is found. The callback URL is called with an HTTP POST with message information in request body",
+                    "required": true
+                },
+                {
+                    "name": "failureNotifyUrl",
+                    "vendorName": "failure_notif_url",
+                    "type": "String",
+                    "info": "(DEPRECATED) A valid URL Context.IO calls if the WebHooks fails and will no longer be active. That may happen if, for example, the server becomes unreachable or if it closes an IDLE connection and we can\u2019t re-establish it.",
+                    "required": true
+                },
+                {
+                    "name": "filterTo",
+                    "vendorName": "filter_to",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Check for new messages received to a given name or email address. Also accepts a comma delimited list of email addresses.",
+                    "required": false
+                },
+                {
+                    "name": "filterFrom",
+                    "vendorName": "filter_from",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Check for new messages received from a given name or email address. Also accepts a comma delimited list of email addresses.",
+                    "required": false
+                },
+                {
+                    "name": "filterEmailList",
+                    "vendorName": "filter_cc",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Check for new messages received from a given name or email address. Also accepts a comma delimited list of email addresses.",
+                    "required": false
+                },
+                {
+                    "name": "filterSubject",
+                    "vendorName": "filter_subject",
+                    "type": "String",
+                    "info": "Check for new messages with a subject matching a given string or regular expression.",
+                    "required": false
+                },
+                {
+                    "name": "filterThread",
+                    "vendorName": "filter_thread",
+                    "type": "String",
+                    "info": "Check for new messages in a given thread. Value can be a gmail_thread_id or the email_message_id of an existing message currently in the thread.",
+                    "required": false
+                },
+                {
+                    "name": "filterFileName",
+                    "vendorName": "filter_file_name",
+                    "type": "String",
+                    "info": "Check for new messages where a file whose name matches the given string is attached. ",
+                    "required": false
+                },
+                {
+                    "name": "filterFolderAdded",
+                    "vendorName": "filter_folder_added",
+                    "type": "String",
+                    "info": "Check for messages filed in a given folder. On Gmail, this is equivalent to having a label applied to a message. The value should be the complete name (including parents if applicable) of the folder you want to track. ",
+                    "required": false
+                },
+                {
+                    "name": "filterFolderRemoved",
+                    "vendorName": "filter_folder_removed",
+                    "type": "String",
+                    "info": "Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.",
+                    "required": false
+                },
+                {
+                    "name": "filterToDomains",
+                    "vendorName": "filter_to_domain",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleDomain",
+                        "type": "String",
+                        "info": "Single domain."
+                    },
+                    "info": "Check for new messages sent to a given domain. Also accepts a comma delimited list of domains.",
+                    "required": false
+                },
+                {
+                    "name": "filterFolderRemoved",
+                    "vendorName": "filter_folder_removed",
+                    "type": "String",
+                    "info": "Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.",
+                    "required": false
+                },
+                {
+                    "name": "includeBody",
+                    "vendorName": "include_body",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to include message bodies in the result. Since message bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "bodyType",
+                    "vendorName": "body_type",
+                    "type": "Select",
+                    "options": [
+                        "text\/html",
+                        "text\/plain"
+                    ],
+                    "info": "Required to be set when \u201cinclude_body\u201d is set to get only body parts of a given MIME-type",
+                    "required": false
+                },
+                {
+                    "name": "includeHeader",
+                    "vendorName": "include_header",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` or raw to include message headers in the result.",
+                    "required": false
+                },
+                {
+                    "name": "receiveAllChanges",
+                    "vendorName": "receive_all_changes",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "By default, we only send a webhook notification on the first event of a message (i.e. when a message is received or sent). Subsequent changes of a specific message do not trigger a webhook (i.e. if a message changes folders). When this parameter is set to `true`, we will send all events related to a message.",
+                    "required": false
+                },
+                {
+                    "name": "receiveDrafts",
+                    "vendorName": "receive_drafts",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true`, you will receive messages that are flagged as 'Drafts' in Gmail",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/webhooks",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "callback_url",
+                            "failure_notif_url",
+                            "filter_to",
+                            "filter_from",
+                            "filterEmailList",
+                            "filter_subject",
+                            "filter_thread",
+                            "filter_file_name",
+                            "filter_folder_added",
+                            "filter_folder_removed",
+                            "filter_to_domain",
+                            "include_body",
+                            "body_type",
+                            "include_header",
+                            "receive_all_changes",
+                            "receive_drafts"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllUserWebhooks",
+            "description": "List all webhooks set on a specific user.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/webhooks",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getUserWebhookDetail",
+            "description": "Get information about a single user level webhook, such whether it is active and what filters are set on the webhook.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "webhookId",
+                    "vendorName": "webhook_id",
+                    "type": "String",
+                    "info": "Unique id of a user level webhook.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/webhooks\/{$data['webhook_id']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "webhook_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateUserLevelWebhook",
+            "description": "Webhooks set at the user level are applicable only to the user on which the webhook is set. User level webhooks should be used for cases when you will be monitoring things that are very specific to each individual user.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "webhookId",
+                    "vendorName": "webhook_id",
+                    "type": "String",
+                    "info": "Unique id of a user level webhook.",
+                    "required": true
+                },
+                {
+                    "name": "callbackUrl",
+                    "vendorName": "callback_url",
+                    "type": "String",
+                    "info": "A valid URL Context.IO calls when a matching message is found. The callback URL is called with an HTTP POST with message information in request body",
+                    "required": false
+                },
+                {
+                    "name": "failureNotifyUrl",
+                    "vendorName": "failure_notif_url",
+                    "type": "String",
+                    "info": "(DEPRECATED) A valid URL Context.IO calls if the WebHooks fails and will no longer be active. That may happen if, for example, the server becomes unreachable or if it closes an IDLE connection and we can\u2019t re-establish it.",
+                    "required": false
+                },
+                {
+                    "name": "active",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "By default, webhooks are set to active when first created. Set to 'false' to temporarily stop receiving callbacks for this webhook. Set to `true` again to resume.",
+                    "required": false
+                },
+                {
+                    "name": "filterTo",
+                    "vendorName": "filter_to",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Check for new messages received to a given name or email address. Also accepts a comma delimited list of email addresses.",
+                    "required": false
+                },
+                {
+                    "name": "filterFrom",
+                    "vendorName": "filter_from",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Check for new messages received from a given name or email address. Also accepts a comma delimited list of email addresses.",
+                    "required": false
+                },
+                {
+                    "name": "filterEmailList",
+                    "vendorName": "filter_cc",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Check for new messages received from a given name or email address. Also accepts a comma delimited list of email addresses.",
+                    "required": false
+                },
+                {
+                    "name": "filterSubject",
+                    "vendorName": "filter_subject",
+                    "type": "String",
+                    "info": "Check for new messages with a subject matching a given string or regular expression.",
+                    "required": false
+                },
+                {
+                    "name": "filterThread",
+                    "vendorName": "filter_thread",
+                    "type": "String",
+                    "info": "Check for new messages in a given thread. Value can be a gmail_thread_id or the email_message_id of an existing message currently in the thread.",
+                    "required": false
+                },
+                {
+                    "name": "filterFileName",
+                    "vendorName": "filter_file_name",
+                    "type": "String",
+                    "info": "Check for new messages where a file whose name matches the given string is attached. ",
+                    "required": false
+                },
+                {
+                    "name": "filterFolderAdded",
+                    "vendorName": "filter_folder_added",
+                    "type": "String",
+                    "info": "Check for messages filed in a given folder. On Gmail, this is equivalent to having a label applied to a message. The value should be the complete name (including parents if applicable) of the folder you want to track. ",
+                    "required": false
+                },
+                {
+                    "name": "filterFolderRemoved",
+                    "vendorName": "filter_folder_removed",
+                    "type": "String",
+                    "info": "Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.",
+                    "required": false
+                },
+                {
+                    "name": "filterToDomains",
+                    "vendorName": "filter_to_domain",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleDomain",
+                        "type": "String",
+                        "info": "Single domain."
+                    },
+                    "info": "Check for new messages sent to a given domain. Also accepts a comma delimited list of domains.",
+                    "required": false
+                },
+                {
+                    "name": "filterFolderRemoved",
+                    "vendorName": "filter_folder_removed",
+                    "type": "String",
+                    "info": "Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.",
+                    "required": false
+                },
+                {
+                    "name": "includeBody",
+                    "vendorName": "include_body",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to include message bodies in the result. Since message bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "bodyType",
+                    "vendorName": "body_type",
+                    "type": "Select",
+                    "options": [
+                        "text\/html",
+                        "text\/plain"
+                    ],
+                    "info": "Required to be set when \u201cinclude_body\u201d is set to get only body parts of a given MIME-type",
+                    "required": false
+                },
+                {
+                    "name": "includeHeader",
+                    "vendorName": "include_header",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` or raw to include message headers in the result.",
+                    "required": false
+                },
+                {
+                    "name": "receiveAllChanges",
+                    "vendorName": "receive_all_changes",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "By default, we only send a webhook notification on the first event of a message (i.e. when a message is received or sent). Subsequent changes of a specific message do not trigger a webhook (i.e. if a message changes folders). When this parameter is set to `true`, we will send all events related to a message.",
+                    "required": false
+                },
+                {
+                    "name": "receiveDrafts",
+                    "vendorName": "receive_drafts",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true`, you will receive messages that are flagged as `Drafts` in Gmail",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/webhooks\/{$data['webhook_id']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "webhook_id",
+                            "active",
+                            "callback_url",
+                            "failure_notif_url",
+                            "filter_to",
+                            "filter_from",
+                            "filterEmailList",
+                            "filter_subject",
+                            "filter_thread",
+                            "filter_file_name",
+                            "filter_folder_added",
+                            "filter_folder_removed",
+                            "filter_to_domain",
+                            "include_body",
+                            "body_type",
+                            "include_header",
+                            "receive_all_changes",
+                            "receive_drafts"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteUserLevelWebhook",
+            "description": "Delete a specific user level webhook.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "webhookId",
+                    "vendorName": "webhook_id",
+                    "type": "String",
+                    "info": "Unique id of a user level webhook.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/webhooks\/{$data['webhook_id']}",
+            "request": {
+                "method": "delete",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "webhook_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createApplicationLevelWebhook",
+            "description": "Webhooks set at the application level apply to all users in your userbase.Application level webhooks encourage a more DRY approach to using the Context.IO API.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "callbackUrl",
+                    "vendorName": "callback_url",
+                    "type": "String",
+                    "info": "A valid URL Context.IO calls when a matching message is found. The callback URL is called with an HTTP POST with message information in request body",
+                    "required": true
+                },
+                {
+                    "name": "failureNotifyUrl",
+                    "vendorName": "failure_notif_url",
+                    "type": "String",
+                    "info": "(DEPRECATED) A valid URL Context.IO calls if the WebHooks fails and will no longer be active. That may happen if, for example, the server becomes unreachable or if it closes an IDLE connection and we can\u2019t re-establish it.",
+                    "required": true
+                },
+                {
+                    "name": "active",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "By default, webhooks are set to active when first created. Set to 'false' to temporarily stop receiving callbacks for this webhook. Set to `true` again to resume.",
+                    "required": false
+                },
+                {
+                    "name": "filterTo",
+                    "vendorName": "filter_to",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Check for new messages received to a given name or email address. Also accepts a comma delimited list of email addresses.",
+                    "required": false
+                },
+                {
+                    "name": "filterFrom",
+                    "vendorName": "filter_from",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Check for new messages received from a given name or email address. Also accepts a comma delimited list of email addresses.",
+                    "required": false
+                },
+                {
+                    "name": "filterEmailList",
+                    "vendorName": "filter_cc",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Check for new messages received from a given name or email address. Also accepts a comma delimited list of email addresses.",
+                    "required": false
+                },
+                {
+                    "name": "filterSubject",
+                    "vendorName": "filter_subject",
+                    "type": "String",
+                    "info": "Check for new messages with a subject matching a given string or regular expression.",
+                    "required": false
+                },
+                {
+                    "name": "filterThread",
+                    "vendorName": "filter_thread",
+                    "type": "String",
+                    "info": "Check for new messages in a given thread. Value can be a gmail_thread_id or the email_message_id of an existing message currently in the thread.",
+                    "required": false
+                },
+                {
+                    "name": "filterFileName",
+                    "vendorName": "filter_file_name",
+                    "type": "String",
+                    "info": "Check for new messages where a file whose name matches the given string is attached. ",
+                    "required": false
+                },
+                {
+                    "name": "filterFolderAdded",
+                    "vendorName": "filter_folder_added",
+                    "type": "String",
+                    "info": "Check for messages filed in a given folder. On Gmail, this is equivalent to having a label applied to a message. The value should be the complete name (including parents if applicable) of the folder you want to track. ",
+                    "required": false
+                },
+                {
+                    "name": "filterFolderRemoved",
+                    "vendorName": "filter_folder_removed",
+                    "type": "String",
+                    "info": "Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.",
+                    "required": false
+                },
+                {
+                    "name": "filterToDomains",
+                    "vendorName": "filter_to_domain",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleDomain",
+                        "type": "String",
+                        "info": "Single domain."
+                    },
+                    "info": "Check for new messages sent to a given domain. Also accepts a comma delimited list of domains.",
+                    "required": false
+                },
+                {
+                    "name": "filterFolderRemoved",
+                    "vendorName": "filter_folder_removed",
+                    "type": "String",
+                    "info": "Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.",
+                    "required": false
+                },
+                {
+                    "name": "includeBody",
+                    "vendorName": "include_body",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to include message bodies in the result. Since message bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "bodyType",
+                    "vendorName": "body_type",
+                    "type": "Select",
+                    "options": [
+                        "text\/html",
+                        "text\/plain"
+                    ],
+                    "info": "Required to be set when \u201cinclude_body\u201d is set to get only body parts of a given MIME-type",
+                    "required": false
+                },
+                {
+                    "name": "includeHeader",
+                    "vendorName": "include_header",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` or raw to include message headers in the result.",
+                    "required": false
+                },
+                {
+                    "name": "receiveAllChanges",
+                    "vendorName": "receive_all_changes",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "By default, we only send a webhook notification on the first event of a message (i.e. when a message is received or sent). Subsequent changes of a specific message do not trigger a webhook (i.e. if a message changes folders). When this parameter is set to `true`, we will send all events related to a message.",
+                    "required": false
+                },
+                {
+                    "name": "receiveDrafts",
+                    "vendorName": "receive_drafts",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true`, you will receive messages that are flagged as `Drafts` in Gmail",
+                    "required": false
+                },
+                {
+                    "name": "receiveHistorical",
+                    "vendorName": "receive_historical",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true`, we will perform a backscan of an account when a new account is added and send messages from new to old to your callback URL.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/webhooks",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "callback_url",
+                            "failure_notif_url",
+                            "active",
+                            "filter_to",
+                            "filter_from",
+                            "filterEmailList",
+                            "filter_subject",
+                            "filter_thread",
+                            "filter_file_name",
+                            "filter_folder_added",
+                            "filter_folder_removed",
+                            "filter_to_domain",
+                            "include_body",
+                            "body_type",
+                            "include_header",
+                            "receive_all_changes",
+                            "receive_drafts"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllApplicationWebhooks",
+            "description": "List all application level webhooks.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/GET 2.0\/webhooks",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getApplicationWebhookDetails",
+            "description": "Get information about a single application level webhook, such whether it is active and what filters are set on the webhook.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "webhookId",
+                    "vendorName": "webhook_id",
+                    "type": "String",
+                    "info": "Unique id of a user level webhook.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/webhooks\/{$data['webhook_id']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "webhook_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateApplicationLevelWebhook",
+            "description": "Edit an existing webhook. Please note changes to an existing webhook are not appended but overwritten.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "webhookId",
+                    "vendorName": "webhook_id",
+                    "type": "String",
+                    "info": "Unique id of a user level webhook.",
+                    "required": true
+                },
+                {
+                    "name": "callbackUrl",
+                    "vendorName": "callback_url",
+                    "type": "String",
+                    "info": "A valid URL Context.IO calls when a matching message is found. The callback URL is called with an HTTP POST with message information in request body",
+                    "required": false
+                },
+                {
+                    "name": "failureNotifyUrl",
+                    "vendorName": "failure_notif_url",
+                    "type": "String",
+                    "info": "(DEPRECATED) A valid URL Context.IO calls if the WebHooks fails and will no longer be active. That may happen if, for example, the server becomes unreachable or if it closes an IDLE connection and we can\u2019t re-establish it.",
+                    "required": false
+                },
+                {
+                    "name": "active",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "By default, webhooks are set to active when first created. Set to 'false' to temporarily stop receiving callbacks for this webhook. Set to `true` again to resume.",
+                    "required": false
+                },
+                {
+                    "name": "filterTo",
+                    "vendorName": "filter_to",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Check for new messages received to a given name or email address. Also accepts a comma delimited list of email addresses.",
+                    "required": false
+                },
+                {
+                    "name": "filterFrom",
+                    "vendorName": "filter_from",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Check for new messages received from a given name or email address. Also accepts a comma delimited list of email addresses.",
+                    "required": false
+                },
+                {
+                    "name": "filterEmailList",
+                    "vendorName": "filter_cc",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleEmail",
+                        "type": "String",
+                        "info": "Single email address."
+                    },
+                    "info": "Check for new messages received from a given name or email address. Also accepts a comma delimited list of email addresses.",
+                    "required": false
+                },
+                {
+                    "name": "filterSubject",
+                    "vendorName": "filter_subject",
+                    "type": "String",
+                    "info": "Check for new messages with a subject matching a given string or regular expression.",
+                    "required": false
+                },
+                {
+                    "name": "filterThread",
+                    "vendorName": "filter_thread",
+                    "type": "String",
+                    "info": "Check for new messages in a given thread. Value can be a gmail_thread_id or the email_message_id of an existing message currently in the thread.",
+                    "required": false
+                },
+                {
+                    "name": "filterFileName",
+                    "vendorName": "filter_file_name",
+                    "type": "String",
+                    "info": "Check for new messages where a file whose name matches the given string is attached. ",
+                    "required": false
+                },
+                {
+                    "name": "filterFolderAdded",
+                    "vendorName": "filter_folder_added",
+                    "type": "String",
+                    "info": "Check for messages filed in a given folder. On Gmail, this is equivalent to having a label applied to a message. The value should be the complete name (including parents if applicable) of the folder you want to track. ",
+                    "required": false
+                },
+                {
+                    "name": "filterFolderRemoved",
+                    "vendorName": "filter_folder_removed",
+                    "type": "String",
+                    "info": "Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.",
+                    "required": false
+                },
+                {
+                    "name": "filterToDomains",
+                    "vendorName": "filter_to_domain",
+                    "type": "List",
+                    "structure": {
+                        "name": "SingleDomain",
+                        "type": "String",
+                        "info": "Single domain."
+                    },
+                    "info": "Check for new messages sent to a given domain. Also accepts a comma delimited list of domains.",
+                    "required": false
+                },
+                {
+                    "name": "filterFolderRemoved",
+                    "vendorName": "filter_folder_removed",
+                    "type": "String",
+                    "info": "Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.",
+                    "required": false
+                },
+                {
+                    "name": "includeBody",
+                    "vendorName": "include_body",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` to include message bodies in the result. Since message bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "bodyType",
+                    "vendorName": "body_type",
+                    "type": "Select",
+                    "options": [
+                        "text\/html",
+                        "text\/plain"
+                    ],
+                    "info": "Required to be set when \u201cinclude_body\u201d is set to get only body parts of a given MIME-type",
+                    "required": false
+                },
+                {
+                    "name": "includeHeader",
+                    "vendorName": "include_header",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true` or raw to include message headers in the result.",
+                    "required": false
+                },
+                {
+                    "name": "receiveAllChanges",
+                    "vendorName": "receive_all_changes",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "By default, we only send a webhook notification on the first event of a message (i.e. when a message is received or sent). Subsequent changes of a specific message do not trigger a webhook (i.e. if a message changes folders). When this parameter is set to `true`, we will send all events related to a message.",
+                    "required": false
+                },
+                {
+                    "name": "receiveDrafts",
+                    "vendorName": "receive_drafts",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true`, you will receive messages that are flagged as `Drafts` in Gmail",
+                    "required": false
+                },
+                {
+                    "name": "receiveHistorical",
+                    "vendorName": "receive_historical",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true`, we will perform a backscan of an account when a new account is added and send messages from new to old to your callback URL.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/webhooks\/{$data['webhook_id']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "callback_url",
+                            "failure_notif_url",
+                            "active",
+                            "filter_to",
+                            "filter_from",
+                            "filterEmailList",
+                            "filter_subject",
+                            "filter_thread",
+                            "filter_file_name",
+                            "filter_folder_added",
+                            "filter_folder_removed",
+                            "filter_to_domain",
+                            "include_body",
+                            "body_type",
+                            "include_header",
+                            "receive_all_changes",
+                            "receive_drafts",
+                            "webhook_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteApplicationLevelWebhook",
+            "description": "Delete a specific user level webhook.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "webhookId",
+                    "vendorName": "webhook_id",
+                    "type": "String",
+                    "info": "Unique id of a user level webhook.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/webhooks\/{$data['webhook_id']}",
+            "request": {
+                "method": "delete",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "webhook_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllContacts",
+            "description": "There are several ways you can interact with a user\u2019s contacts.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "search",
+                    "type": "String",
+                    "info": "String identifying the name or the email address of the contact(s) you are looking for.",
+                    "required": false
+                },
+                {
+                    "name": "activeBefore",
+                    "vendorName": "active_before",
+                    "type": "DatePicker",
+                    "info": "Only include contacts included in at least one email dated before a given time. ",
+                    "required": false
+                },
+                {
+                    "name": "activeAfter",
+                    "vendorName": "active_after",
+                    "type": "DatePicker",
+                    "info": "Only include contacts included in at least one email dated after a given time.",
+                    "required": false
+                },
+                {
+                    "name": "sortBy",
+                    "vendorName": "sort_by",
+                    "type": "Select",
+                    "options": [
+                        "email",
+                        "count",
+                        "received_count",
+                        "sent_count"
+                    ],
+                    "info": "The field by which to sort the returned results.",
+                    "required": false
+                },
+                {
+                    "name": "sortOrder",
+                    "vendorName": "sort_order",
+                    "type": "Select",
+                    "options": [
+                        "asc",
+                        "desc"
+                    ],
+                    "info": "The sort order of the returned results.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.",
+                    "required": false
+                },
+                {
+                    "name": "offset",
+                    "type": "Number",
+                    "info": "Start the list at this offset (zero-based).",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/contacts",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "search",
+                            "active_before",
+                            "active_after",
+                            "sort_by",
+                            "sort_order",
+                            "limit",
+                            "offset"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getContactDetails",
+            "description": "Get information about a given contact such as when a message was last sent or last received, as well as how many messages have been sent to this contact, or received from this contact.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "Email address of a contact",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/contacts\/{$data['email']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "email"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getFilesSharedWithContact",
+            "description": "List files shared with a specific contact(s).",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "Email address of a contact",
+                    "required": true
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.",
+                    "required": false
+                },
+                {
+                    "name": "offset",
+                    "type": "Number",
+                    "info": "Start the list at this offset (zero-based).",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/contacts\/{$data['email']}\/files",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "email",
+                            "limit",
+                            "offset"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getListMessagesExchange",
+            "description": "Get a list of email messages exchanged with one or more email addresses. This includes messages sent by a contact, received from a contact, or where both the contact and mailbox owner are included in the list of recipients.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "Email address of a contact.",
+                    "required": true
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.",
+                    "required": false
+                },
+                {
+                    "name": "offset",
+                    "type": "Number",
+                    "info": "Start the list at this offset (zero-based).",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/contacts\/{$data['email']}\/messages",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "email",
+                            "limit",
+                            "offset"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getListThreadsIncludeContact",
+            "description": "List threads where a specific contact(s) is present in the recipient list.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "Email address of a contact.",
+                    "required": true
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.",
+                    "required": false
+                },
+                {
+                    "name": "offset",
+                    "type": "Number",
+                    "info": "Start the list at this offset (zero-based).",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/contacts\/{$data['email']}\/threads",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "email",
+                            "limit",
+                            "offset"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllFiles",
+            "description": "The name of a source in Context.IO is called a \u201clabel\u201d. The label will be included in the response when you get account or source details and looks something like `email::provider`.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "fileName",
+                    "vendorName": "file_name",
+                    "type": "String",
+                    "info": "Search for files based on their name. You can filter names using typical shell wildcards such as *, ? and [] or regular expressions by enclosing the search expression in a leading \/ and trailing \/. For example, *.pdf would give you all PDF files while \/.jpe?g$\/ would return all files whose name ends with .jpg or .jpeg",
+                    "required": false
+                },
+                {
+                    "name": "fileSizeMin",
+                    "vendorName": "file_size_min",
+                    "type": "Number",
+                    "info": "Search for files based on their size (in bytes).",
+                    "required": false
+                },
+                {
+                    "name": "fileSizeMax",
+                    "vendorName": "file_size_max",
+                    "type": "Number",
+                    "info": "Search for files based on their size (in bytes).",
+                    "required": false
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "Email address of the contact for whom you want the latest files in which this email address was listed as a recipient.",
+                    "required": false
+                },
+                {
+                    "name": "to",
+                    "type": "String",
+                    "info": "Email address of a contact messages have been sent to.",
+                    "required": false
+                },
+                {
+                    "name": "from",
+                    "type": "String",
+                    "info": "Email address of a contact messages have been received from.",
+                    "required": false
+                },
+                {
+                    "name": "emailOfContactCC",
+                    "vendorName": "cc",
+                    "type": "String",
+                    "info": "Email address of a contact CC'ed on the messages.",
+                    "required": false
+                },
+                {
+                    "name": "emailOfContactBCC",
+                    "vendorName": "bcc",
+                    "type": "String",
+                    "info": "Email address of a contact BCC'ed on the messages.",
+                    "required": false
+                },
+                {
+                    "name": "dateBefore",
+                    "vendorName": "date_before",
+                    "type": "DatePicker",
+                    "info": "Only include messages before a given timestamp. The value this filter is applied to is the Date: header of the message which refers to the time the message is sent from the origin.",
+                    "required": false
+                },
+                {
+                    "name": "dateAfter",
+                    "vendorName": "date_after",
+                    "type": "DatePicker",
+                    "info": "Only include messages after a given timestamp. The value this filter is applied to is the Date: header of the message which refers to the time the message is sent from the origin.",
+                    "required": false
+                },
+                {
+                    "name": "indexedBefore",
+                    "vendorName": "indexed_before",
+                    "type": "DatePicker",
+                    "info": "Only include messages indexed before a given timestamp. This is not the same as the date of the email, it is the time Context.IO indexed this message.",
+                    "required": false
+                },
+                {
+                    "name": "indexedAfter",
+                    "vendorName": "indexed_after",
+                    "type": "DatePicker",
+                    "info": "Only include messages indexed after a given timestamp. This is not the same as the date of the email, it is the time Context.IO indexed this message.",
+                    "required": false
+                },
+                {
+                    "name": "source",
+                    "type": "String",
+                    "info": "Filter messages by the account source label.",
+                    "required": false
+                },
+                {
+                    "name": "sortOrder",
+                    "vendorName": "sort_order",
+                    "type": "Select",
+                    "options": [
+                        "asc",
+                        "desc"
+                    ],
+                    "info": "The sort order of the returned results.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.",
+                    "required": false
+                },
+                {
+                    "name": "offset",
+                    "type": "Number",
+                    "info": "Start the list at this offset (zero-based).",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/files",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "file_name",
+                            "file_size_min",
+                            "file_size_max",
+                            "email",
+                            "to",
+                            "from",
+                            "cc",
+                            "bcc",
+                            "date_before",
+                            "date_after",
+                            "indexed_before",
+                            "indexed_after",
+                            "source",
+                            "sort_order",
+                            "limit",
+                            "offset"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getFileDetails",
+            "description": "Get details about a specific file.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "fileId",
+                    "vendorName": "file_id",
+                    "type": "String",
+                    "info": "Unique id of a file.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/files\/{$data['file_id']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "file_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "downloadFilesContents",
+            "description": "There are a couple ways you can download the file itself from the API.Get the file itself in the response;Get an AWS link you can use to download the file;",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "fileId",
+                    "vendorName": "file_id",
+                    "type": "String",
+                    "info": "Unique id of a file.",
+                    "required": true
+                },
+                {
+                    "name": "asLink",
+                    "vendorName": "as_link",
+                    "type": "Select",
+                    "options": [
+                        "true"
+                    ],
+                    "info": "Set to `true`, get an AWS link you can use to download the file.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/files\/{$data['file_id']}\/content",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "id",
+                            "file_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "discoveringImapSettings",
+            "description": "If you prefer to handle your own authentication and add accounts or sources manually, you may want to check for IMAP configuration settings to add users. The Discovery endpoint returns known IMAP configuration settings given an email address.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "sourceType",
+                    "vendorName": "source_type",
+                    "type": "Select",
+                    "options": [
+                        "IMAP"
+                    ],
+                    "info": "The type of source you want to discover settings for.",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "An email address you want to discover IMAP settings for.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/discovery",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "source_type",
+                            "file_id",
+                            "email"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllOauthProviders",
+            "description": "List all oauth providers linked to your Context.IO API key.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/oauth_providers",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createOauthProvider",
+            "description": "Add an oauth provider.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "type",
+                    "type": "Select",
+                    "options": [
+                        "GMAIL_OAUTH2",
+                        "MSLIVECONNECT"
+                    ],
+                    "info": "Identification of the OAuth2 provider.",
+                    "required": true
+                },
+                {
+                    "name": "providerConsumerKey",
+                    "vendorName": "provider_consumer_key",
+                    "type": "String",
+                    "info": "The OAuth2 Client ID.",
+                    "required": true
+                },
+                {
+                    "name": "providerConsumerSecret",
+                    "vendorName": "provider_consumer_secret",
+                    "type": "String",
+                    "info": "The OAuth2 Client Secret",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/oauth_providers",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "type",
+                            "provider_consumer_key",
+                            "provider_consumer_secret"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getOauthProviderDetails",
+            "description": "Get information about an oauth provider.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "providerConsumerKey",
+                    "vendorName": "key",
+                    "type": "String",
+                    "info": "The consumer key for this external OAuth provider",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/oauth_providers\/{$data['key']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "key"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteOauthProvider",
+            "description": "Delete an oauth provider.",
+            "args": [
+                {
+                    "name": "consumerKey",
+                    "vendorName": "consumer_key",
+                    "type": "credentials",
+                    "info": "The consumer key from your account.",
+                    "required": true
+                },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "providerConsumerKey",
+                    "vendorName": "key",
+                    "type": "String",
+                    "info": "The consumer key for this external OAuth provider",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.context.io\/2.0\/oauth_providers\/{$data['key']}",
+            "request": {
+                "method": "delete",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "consumer_secret",
+                            "consumer_key",
+                            "key"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        }
+    ]
+}
