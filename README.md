@@ -7,7 +7,7 @@ Context.IO is a modern, scalable email API that brings IMAP into the 21st centur
 
 ## How to get credentials: 
 1. Register on the [context.com](https://context.io/).
-2. After register, in [console](https://console.context.io/), you OAuth consumer key and secret.
+2. After register, in [console](https://console.context.io/), you will see OAuth consumer key and secret.
  
  
 ## Custom datatypes: 
