@@ -5,7 +5,7 @@ use GuzzleHttp\Client,
     GuzzleHttp\Handler\CurlHandler,
     GuzzleHttp\Subscriber\Oauth\Oauth1;
 
-$app->post('/api/Context.io/getAccountDetails', function ($request, $response) {
+$app->post('/api/ContextIO/getAccountDetails', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;

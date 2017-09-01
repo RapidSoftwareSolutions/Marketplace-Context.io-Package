@@ -6,7 +6,7 @@ use GuzzleHttp\Client,
     GuzzleHttp\Subscriber\Oauth\Oauth1;
 
 
-$app->post('/api/Context.io/updateMessageFlags', function ($request, $response) {
+$app->post('/api/ContextIO/updateMessageFlags', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;

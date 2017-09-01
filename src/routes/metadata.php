@@ -1,6 +1,6 @@
 <?php
 
-$app->get('/api/Context.io', function ($request, $response, $args) {
+$app->get('/api/ContextIO', function ($request, $response, $args) {
     $schema = file_get_contents(__DIR__ . '/../../src/metadata/schema.json');
     $metadata = new Models\Metadata($schema);
     $result = $metadata->create();

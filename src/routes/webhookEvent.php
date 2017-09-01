@@ -1,5 +1,5 @@
 <?php
-$app->post('/api/Context.io/webhookEvent', function ($request, $response) {
+$app->post('/api/ContextIO/webhookEvent', function ($request, $response) {
 
  $checkRequest = $this->validation;
     $validateRes = $checkRequest->validate($request, []);

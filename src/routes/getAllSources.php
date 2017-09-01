@@ -4,7 +4,7 @@ use GuzzleHttp\Client,
     GuzzleHttp\Handler\CurlHandler,
     GuzzleHttp\Subscriber\Oauth\Oauth1;
 
-$app->post('/api/Context.io/getAllSources', function ($request, $response) {
+$app->post('/api/ContextIO/getAllSources', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;

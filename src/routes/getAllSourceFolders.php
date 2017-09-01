@@ -6,7 +6,7 @@ use GuzzleHttp\Client,
     GuzzleHttp\Subscriber\Oauth\Oauth1;
 
 
-$app->post('/api/Context.io/getAllSourceFolders', function ($request, $response) {
+$app->post('/api/ContextIO/getAllSourceFolders', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;

@@ -39,7 +39,7 @@ $app->post('/api/Context.io/getAllApplicationWebhooks', function ($request, $res
     ]);
 
 
-    $query_str = "https://api.context.io/GET 2.0/webhooks";
+    $query_str = "https://api.context.io/2.0/webhooks";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];

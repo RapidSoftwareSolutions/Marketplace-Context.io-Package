@@ -7,7 +7,7 @@ use GuzzleHttp\Client,
     GuzzleHttp\Subscriber\Oauth\Oauth1;
 
 
-$app->post('/api/Context.io/connectTokensWizard', function ($request, $response) {
+$app->post('/api/ContextIO/connectTokensWizard', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;

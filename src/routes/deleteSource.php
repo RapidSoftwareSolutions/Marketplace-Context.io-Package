@@ -5,7 +5,7 @@ use GuzzleHttp\Client,
     GuzzleHttp\Handler\CurlHandler,
     GuzzleHttp\Subscriber\Oauth\Oauth1;
 
-$app->post('/api/Context.io/deleteSource', function ($request, $response) {
+$app->post('/api/ContextIO/deleteSource', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
