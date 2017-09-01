@@ -71,6 +71,7 @@ $app->post('/api/ContextIO/getFolderMessages', function ($request, $response) {
     $middleware = new Oauth1([
         'consumer_key' => $data['consumer_key'],
         'consumer_secret' => $data['consumer_secret'],
+        'token_secret' => ''
     ]);
 
     $stack->push($middleware);
@@ -79,7 +80,6 @@ $app->post('/api/ContextIO/getFolderMessages', function ($request, $response) {
         'handler' => $stack,
         'auth' => 'oauth'
     ]);
-
 
     $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/sources/{$data['label']}/folders/{$data['folder']}/messages";
 
