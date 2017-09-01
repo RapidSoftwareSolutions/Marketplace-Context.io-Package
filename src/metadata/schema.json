@@ -1280,7 +1280,7 @@
                     "required": false
                 }
             ],
-            "url": "https://api.context.io/2.0/accounts/{$data['id']}/sources/{$data['label']}/folders/{$data['folder']}/messages",
+            "url": "https://api.contextIO/2.0/accounts/{$data['id']}/sources/{$data['label']}/folders/{$data['folder']}/messages",
             "request": {
                 "method": "get",
                 "params": [{
