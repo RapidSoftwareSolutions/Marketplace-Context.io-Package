@@ -60,7 +60,7 @@ $app->post('/api/ContextIO/createSources', function ($request, $response) {
     $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/sources";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
-    $requestParams['headers'] = [];
+
 
     try {
         $resp = $client->post($query_str, $requestParams);
