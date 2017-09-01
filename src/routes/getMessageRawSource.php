@@ -38,7 +38,7 @@ $app->post('/api/ContextIO/getMessageRawSource', function ($request, $response) 
         'auth' => 'oauth'
     ]);
 
-    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/message/{$data['message_id']}/source";
+    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/messages/{$data['message_id']}/source";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];

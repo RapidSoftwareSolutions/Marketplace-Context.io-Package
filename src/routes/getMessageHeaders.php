@@ -44,7 +44,7 @@ $app->post('/api/ContextIO/getMessageHeaders', function ($request, $response) {
         'auth' => 'oauth'
     ]);
 
-    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/message/{$data['message_id']}/headers";
+    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/messages/{$data['message_id']}/headers";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];

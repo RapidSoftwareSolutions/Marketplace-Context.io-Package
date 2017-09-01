@@ -38,7 +38,7 @@ $app->post('/api/ContextIO/getMessageFolders', function ($request, $response) {
         'auth' => 'oauth'
     ]);
 
-    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/message/{$data['message_id']}/folders";
+    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/messages/{$data['message_id']}/folders";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];

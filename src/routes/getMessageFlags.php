@@ -38,7 +38,7 @@ $app->post('/api/ContextIO/getMessageFlags', function ($request, $response) {
         'auth' => 'oauth'
     ]);
 
-    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/message/{$data['message_id']}/flags";
+    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/messages/{$data['message_id']}/flags";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];

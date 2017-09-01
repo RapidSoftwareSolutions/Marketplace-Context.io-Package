@@ -38,10 +38,13 @@ $app->post('/api/ContextIO/getMessageBody', function ($request, $response) {
         'auth' => 'oauth'
     ]);
 
-    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/message/{$data['message_id']}/body";
+    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/messages/{$data['message_id']}/body";
+
+
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];
+
 
     try {
         $resp = $client->get($query_str, $requestParams);
