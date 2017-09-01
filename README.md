@@ -1,7 +1,7 @@
-[![](https://scdn.rapidapi.com/RapidAPI_banner.png)](https://rapidapi.com/package/Context.io/functions?utm_source=RapidAPIGitHub_Context.ioFunctions&utm_medium=button&utm_content=RapidAPI_GitHub)
+[![](https://scdn.rapidapi.com/RapidAPI_banner.png)](https://rapidapi.com/package/ContextIO/functions?utm_source=RapidAPIGitHub_ContextIOFunctions&utm_medium=button&utm_content=RapidAPI_GitHub)
 
-# Context.io Package
-Context.IO is a modern, scalable email API that brings IMAP into the 21st century.Enrich your application with email data: contacts, attachments, receipts, reservations, travel information, and much more.Context.IO can connect to any IMAP enabled email including Gmail, Google Apps, Outlook, Yahoo, AOL, and more.Get near real-time notifications for new and sent messages via webhooks. We offer rich filtering features to ensure you only get the data you need.Context.IO is free to use for most cases, but we offer flexible pricing tiers for companies of any size.
+# ContextIO Package
+ContextIO is a modern, scalable email API that brings IMAP into the 21st century.Enrich your application with email data: contacts, attachments, receipts, reservations, travel information, and much more.Context.IO can connect to any IMAP enabled email including Gmail, Google Apps, Outlook, Yahoo, AOL, and more.Get near real-time notifications for new and sent messages via webhooks. We offer rich filtering features to ensure you only get the data you need.Context.IO is free to use for most cases, but we offer flexible pricing tiers for companies of any size.
 * Domain: [context.com](https://context.io/)
 * Credentials: consumerKey, consumerSecret
 
@@ -19,7 +19,7 @@ Context.IO is a modern, scalable email API that brings IMAP into the 21st centur
  |Select|String with predefined values|```sample```
  |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
  
-## Context.io.createAccount
+## ContextIO.createAccount
 You can create an account with no source by only passing in the email param. If you choose this option, you will need to add a source later.
 
 | Field               | Type       | Description
@@ -34,7 +34,7 @@ You can create an account with no source by only passing in the email param. If 
 | callbackUrl         | String     | If specified, we’ll make a POST request to this URL when the initial sync is completed. 
 | statusCallbackUrl   | String     | If specified, we’ll make a POST request to this URL if the connection status of the source changes. 
 
-## Context.io.createSources
+## ContextIO.createSources
 Use this endpoint to add a source to an existing account. An account id is required to add a source to an existing account.
 
 | Field               | Type       | Description
@@ -58,7 +58,7 @@ Use this endpoint to add a source to an existing account. An account id is requi
 | statusCallbackUrl   | String     | If specified, we’ll make a POST request to this URL if the connection status of the source changes. 
 | rawFileList         | Select     | By default, we filter out files like signature images or those winmail.dat files form the files list. Set this parameter to `off` to turn off this filtering and show every single file attachments.
 
-## Context.io.deleteAccount
+## ContextIO.deleteAccount
 If you need to delete an account, you can do so by using this endpoint. This will delete the account and all sources associated with it.
 
 | Field         | Type       | Description
@@ -67,7 +67,7 @@ If you need to delete an account, you can do so by using this endpoint. This wil
 | consumerSecret| credentials| The consumer secret from your account.
 | accountId     | String     | Unique id of an account.
 
-## Context.io.deleteSource
+## ContextIO.deleteSource
 If you wish to only delete a certain source from the account, but not delete the account itself.
 
 | Field         | Type       | Description
@@ -77,7 +77,7 @@ If you wish to only delete a certain source from the account, but not delete the
 | accountId     | String     | Unique id of an account.
 | label         | String     | The label property of the source instance. You can use 0 as an alias for the first source of an account.
 
-## Context.io.connectTokensWizard
+## ContextIO.connectTokensWizard
 Connect tokens are a feature we provide to facilitate account creation.
 
 | Field                     | Type       | Description
@@ -95,7 +95,7 @@ Connect tokens are a feature we provide to facilitate account creation.
 | sourceRawFileList         | Select     | By default, we filter out files like signature images or those winmail.dat files form the files list. Set this parameter to 1 to turn off this filtering and show every single file attachments.
 | statusCallbackUrl         | String     | If specified, we’ll make a POST request to this URL if the connection status of the source changes. 
 
-## Context.io.getConnectTokenDetails
+## ContextIO.getConnectTokenDetails
 Getting data about connect token will tell you:If the connect token was used;It not used, you will see when it will expire;If the connect token was used, you will see data about which source was added with the connect token;
 
 | Field         | Type       | Description
@@ -105,7 +105,7 @@ Getting data about connect token will tell you:If the connect token was used;It 
 | accountId     | String     | Unique id of an account.
 | token         | String     | The unique random token used to add a second source to an existing account.
 
-## Context.io.getAllConnectTokensForAccount
+## ContextIO.getAllConnectTokensForAccount
 Use this call to list all connect tokens associated with an account (used or unused).
 
 | Field         | Type       | Description
@@ -114,7 +114,7 @@ Use this call to list all connect tokens associated with an account (used or unu
 | consumerSecret| credentials| The consumer secret from your account.
 | accountId     | String     | Unique id of an account.
 
-## Context.io.getAllConnectTokensForSource
+## ContextIO.getAllConnectTokensForSource
 Use this call to list all connect tokens associated with a source (used or unused).
 
 | Field         | Type       | Description
@@ -124,7 +124,7 @@ Use this call to list all connect tokens associated with a source (used or unuse
 | accountId     | String     | Unique id of an account.
 | label         | String     | The label property of the source instance.
 
-## Context.io.getAccountDetails
+## ContextIO.getAccountDetails
 Getting details at the account level will give you:Account creation date;List all sources linked to the account;Number of messages currently in the mailbox;
 
 | Field         | Type       | Description
@@ -133,7 +133,7 @@ Getting details at the account level will give you:Account creation date;List al
 | consumerSecret| credentials| The consumer secret from your account.
 | accountId     | String     | Unique id of an account.
 
-## Context.io.getAllSources
+## ContextIO.getAllSources
 If the account has more than once source, this endpoint will list all sources associated with the account. Optional parameters will allow you to filter by source status.
 
 | Field         | Type       | Description
@@ -144,7 +144,7 @@ If the account has more than once source, this endpoint will list all sources as
 | status        | Select     | Only return sources whose status is of a specific value.
 | statusOk      | Select     | Set to `false` to get sources that are not working correctly. Set to `true` to get those that are.
 
-## Context.io.getSourceDetail
+## ContextIO.getSourceDetail
 The name of a source in Context.IO is called a “label”. The label will be included in the response when you get account or source details and looks something like `email::provider`.
 
 | Field         | Type       | Description
@@ -154,7 +154,7 @@ The name of a source in Context.IO is called a “label”. The label will be in
 | accountId     | String     | Unique id of an account.
 | label         | String     | The label property of the source instance.
 
-## Context.io.getAllMessages
+## ContextIO.getAllMessages
 List all messages in the account (including all sources associated with the account). This call hits our cache of metadata for the account, so this call should be faster than hitting IMAP.
 
 | Field            | Type       | Description
@@ -187,7 +187,7 @@ List all messages in the account (including all sources associated with the acco
 | limit            | Number     | The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.
 | offset           | Number     | Start the list at this offset (zero-based).
 
-## Context.io.getMessage
+## ContextIO.getMessage
 Get an individual message based on a `messageId`. You can use either a `messageId` or `emailMessageId`
 
 | Field            | Type       | Description
@@ -203,7 +203,7 @@ Get an individual message based on a `messageId`. You can use either a `messageI
 | bodyType         | String     | Used when includeBody is set to get only body parts of a given MIME-type (for example text/html).
 | includeSource    | Select     | Set to 1 to include message sources in the result. Since message sources must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
 
-## Context.io.getMessageBody
+## ContextIO.getMessageBody
 The name of a source in Context.IO is called a “label”. The label will be included in the response when you get account or source details and looks something like `email::provider`.
 
 | Field         | Type       | Description
@@ -214,7 +214,7 @@ The name of a source in Context.IO is called a “label”. The label will be in
 | messageId     | String     | Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.
 | type          | Select     | Many emails are sent with both rich text and plain text versions in the message body and by default, the response of this call will include both.
 
-## Context.io.getMessageFlags
+## ContextIO.getMessageFlags
 This call lists all flags currently applied to this message.
 
 | Field         | Type       | Description
@@ -224,7 +224,7 @@ This call lists all flags currently applied to this message.
 | accountId     | String     | Unique id of an account.
 | messageId     | String     | Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.
 
-## Context.io.updateMessageFlags
+## ContextIO.updateMessageFlags
 This call will allow you to set or unset flags for a specific message.
 
 | Field         | Type       | Description
@@ -239,7 +239,7 @@ This call will allow you to set or unset flags for a specific message.
 | deleted       | Select     | Message is `deleted` for later removal. An alternative way of deleting messages is to move it to the Trash folder. Set this parameter to `set` to set the flag, `unset` to unset it.
 | draft         | Select     | Message has not completed composition (marked as a draft). Set this parameter to `set` to set the flag, `unset` to unset it.
 
-## Context.io.getMessageFolders
+## ContextIO.getMessageFolders
 This call returns the folder(s) a message appears in.
 
 | Field         | Type       | Description
@@ -249,7 +249,7 @@ This call returns the folder(s) a message appears in.
 | accountId     | String     | Unique id of an account.
 | messageId     | String     | Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.
 
-## Context.io.getMessageHeaders
+## ContextIO.getMessageHeaders
 This call returns only the headers for this message. We send a parsed response by default, but you can also choose to get the raw RFC 822 headers.
 
 | Field         | Type       | Description
@@ -260,7 +260,7 @@ This call returns only the headers for this message. We send a parsed response b
 | messageId     | String     | Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.
 | raw           | Select     | By default, this returns messages headers parsed into an array. Set this parameter to `unparsed` to get raw unparsed headers.
 
-## Context.io.getMessageRawSource
+## ContextIO.getMessageRawSource
 This endpoint returns the raw RFC 822 source message.
 
 | Field         | Type       | Description
@@ -270,7 +270,7 @@ This endpoint returns the raw RFC 822 source message.
 | accountId     | String     | Unique id of an account.
 | messageId     | String     | Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.
 
-## Context.io.getMessageThread
+## ContextIO.getMessageThread
 This endpoint returns the the entire thread of messages a message is in that Context.IO has access to. Replies in the thread from accounts not in Context.Io would not appear here.
 
 | Field         | Type       | Description
@@ -288,7 +288,7 @@ This endpoint returns the the entire thread of messages a message is in that Con
 | limit         | Number     | The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.
 | offset        | Number     | Start the list at this offset (zero-based).
 
-## Context.io.updateMessage
+## ContextIO.updateMessage
 This call allows you to copy or move a message between folders, or also change the message’s flags all at once. If there are more than one source on the account, you can use this call to copy/move the message between these sources. 
 
 | Field         | Type       | Description
@@ -305,7 +305,7 @@ This call allows you to copy or move a message between folders, or also change t
 | flagDeleted   | Select     | Message is `deleted` for later removal. An alternative way of deleting messages is to move it to the Trash folder. Set this parameter to `set` to set the flag, `unset` to unset it.
 | flagDraft     | Select     | Message has not completed composition (marked as a draft). Set this parameter to `set` to set the flag, `unset` to unset it.
 
-## Context.io.moveMessage
+## ContextIO.moveMessage
 This call allows you to move a message between folders, or also change the message’s flags all at once. If there are more than one source on the account, you can use this call to copy/move the message between these sources. 
 
 | Field         | Type       | Description
@@ -321,7 +321,7 @@ This call allows you to move a message between folders, or also change the messa
 | flagDeleted   | Select     | Message is `deleted` for later removal. An alternative way of deleting messages is to move it to the Trash folder. Set this parameter to `set` to set the flag, `unset` to unset it.
 | flagDraft     | Select     | Message has not completed composition (marked as a draft). Set this parameter to `set` to set the flag, `unset` to unset it.
 
-## Context.io.getAllSourceFolders
+## ContextIO.getAllSourceFolders
 List folders for a given source (email address).
 
 | Field                | Type       | Description
@@ -333,7 +333,7 @@ List folders for a given source (email address).
 | includeExtendedCounts| Select     | Set to `include` to include extended counts in the result (for now, the only extended count supported is number of unseen messages). Since counts must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
 | noCache              | Select     | Set to `true` to fetch the folder list directly from the IMAP server. Since data must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
 
-## Context.io.getSourceFolder
+## ContextIO.getSourceFolder
 Get information about a given folder such as number of messages, number of unseen messages, and other attributes.
 
 | Field                | Type       | Description
@@ -346,7 +346,7 @@ Get information about a given folder such as number of messages, number of unsee
 | delimiter            | String     | If / isn’t fancy enough as a hierarchy delimiter when specifying the folder you want to obtain, you’re free to use what you want, just make sure you set this delim parameter to tell us what you’re using.
 | includeExtendedCounts| Select     | Set to `include` to include extended counts in the result (for now, the only extended count supported is number of unseen messages). Since counts must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
 
-## Context.io.createUserLevelWebhook
+## ContextIO.createUserLevelWebhook
 Webhooks set at the user level are applicable only to the user on which the webhook is set. User level webhooks should be used for cases when you will be monitoring things that are very specific to each individual user.
 
 | Field              | Type       | Description
@@ -372,7 +372,7 @@ Webhooks set at the user level are applicable only to the user on which the webh
 | receiveAllChanges  | Select     | By default, we only send a webhook notification on the first event of a message (i.e. when a message is received or sent). Subsequent changes of a specific message do not trigger a webhook (i.e. if a message changes folders). When this parameter is set to `true`, we will send all events related to a message.
 | receiveDrafts      | Select     | Set to `true`, you will receive messages that are flagged as 'Drafts' in Gmail
 
-## Context.io.getAllUserWebhooks
+## ContextIO.getAllUserWebhooks
 List all webhooks set on a specific user.
 
 | Field         | Type       | Description
@@ -381,7 +381,7 @@ List all webhooks set on a specific user.
 | consumerSecret| credentials| The consumer secret from your account.
 | accountId     | String     | Unique id of an account.
 
-## Context.io.getUserWebhookDetail
+## ContextIO.getUserWebhookDetail
 Get information about a single user level webhook, such whether it is active and what filters are set on the webhook.
 
 | Field         | Type       | Description
@@ -391,7 +391,7 @@ Get information about a single user level webhook, such whether it is active and
 | accountId     | String     | Unique id of an account.
 | webhookId     | String     | Unique id of a user level webhook.
 
-## Context.io.updateUserLevelWebhook
+## ContextIO.updateUserLevelWebhook
 Webhooks set at the user level are applicable only to the user on which the webhook is set. User level webhooks should be used for cases when you will be monitoring things that are very specific to each individual user.
 
 | Field              | Type       | Description
@@ -419,7 +419,7 @@ Webhooks set at the user level are applicable only to the user on which the webh
 | receiveAllChanges  | Select     | By default, we only send a webhook notification on the first event of a message (i.e. when a message is received or sent). Subsequent changes of a specific message do not trigger a webhook (i.e. if a message changes folders). When this parameter is set to `true`, we will send all events related to a message.
 | receiveDrafts      | Select     | Set to `true`, you will receive messages that are flagged as `Drafts` in Gmail
 
-## Context.io.deleteUserLevelWebhook
+## ContextIO.deleteUserLevelWebhook
 Delete a specific user level webhook.
 
 | Field         | Type       | Description
@@ -429,7 +429,7 @@ Delete a specific user level webhook.
 | accountId     | String     | Unique id of an account.
 | webhookId     | String     | Unique id of a user level webhook.
 
-## Context.io.createApplicationLevelWebhook
+## ContextIO.createApplicationLevelWebhook
 Webhooks set at the application level apply to all users in your userbase.Application level webhooks encourage a more DRY approach to using the Context.IO API.
 
 | Field              | Type       | Description
@@ -456,7 +456,7 @@ Webhooks set at the application level apply to all users in your userbase.Applic
 | receiveDrafts      | Select     | Set to `true`, you will receive messages that are flagged as `Drafts` in Gmail
 | receiveHistorical  | Select     | Set to `true`, we will perform a backscan of an account when a new account is added and send messages from new to old to your callback URL.
 
-## Context.io.getAllApplicationWebhooks
+## ContextIO.getAllApplicationWebhooks
 List all application level webhooks.
 
 | Field         | Type       | Description
@@ -464,7 +464,7 @@ List all application level webhooks.
 | consumerKey   | credentials| The consumer key from your account.
 | consumerSecret| credentials| The consumer secret from your account.
 
-## Context.io.getApplicationWebhookDetails
+## ContextIO.getApplicationWebhookDetails
 Get information about a single application level webhook, such whether it is active and what filters are set on the webhook.
 
 | Field         | Type       | Description
@@ -473,7 +473,7 @@ Get information about a single application level webhook, such whether it is act
 | consumerSecret| credentials| The consumer secret from your account.
 | webhookId     | String     | Unique id of a user level webhook.
 
-## Context.io.updateApplicationLevelWebhook
+## ContextIO.updateApplicationLevelWebhook
 Edit an existing webhook. Please note changes to an existing webhook are not appended but overwritten.
 
 | Field              | Type       | Description
@@ -501,7 +501,7 @@ Edit an existing webhook. Please note changes to an existing webhook are not app
 | receiveDrafts      | Select     | Set to `true`, you will receive messages that are flagged as `Drafts` in Gmail
 | receiveHistorical  | Select     | Set to `true`, we will perform a backscan of an account when a new account is added and send messages from new to old to your callback URL.
 
-## Context.io.deleteApplicationLevelWebhook
+## ContextIO.deleteApplicationLevelWebhook
 Delete a specific user level webhook.
 
 | Field         | Type       | Description
@@ -510,7 +510,7 @@ Delete a specific user level webhook.
 | consumerSecret| credentials| The consumer secret from your account.
 | webhookId     | String     | Unique id of a user level webhook.
 
-## Context.io.getAllContacts
+## ContextIO.getAllContacts
 There are several ways you can interact with a user’s contacts.
 
 | Field         | Type       | Description
@@ -526,7 +526,7 @@ There are several ways you can interact with a user’s contacts.
 | limit         | Number     | The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.
 | offset        | Number     | Start the list at this offset (zero-based).
 
-## Context.io.getContactDetails
+## ContextIO.getContactDetails
 Get information about a given contact such as when a message was last sent or last received, as well as how many messages have been sent to this contact, or received from this contact.
 
 | Field         | Type       | Description
@@ -536,7 +536,7 @@ Get information about a given contact such as when a message was last sent or la
 | accountId     | String     | Unique id of an account.
 | email         | String     | Email address of a contact
 
-## Context.io.getFilesSharedWithContact
+## ContextIO.getFilesSharedWithContact
 List files shared with a specific contact(s).
 
 | Field         | Type       | Description
@@ -548,7 +548,7 @@ List files shared with a specific contact(s).
 | limit         | Number     | The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.
 | offset        | Number     | Start the list at this offset (zero-based).
 
-## Context.io.getListMessagesExchange
+## ContextIO.getListMessagesExchange
 Get a list of email messages exchanged with one or more email addresses. This includes messages sent by a contact, received from a contact, or where both the contact and mailbox owner are included in the list of recipients.
 
 | Field         | Type       | Description
@@ -560,7 +560,7 @@ Get a list of email messages exchanged with one or more email addresses. This in
 | limit         | Number     | The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.
 | offset        | Number     | Start the list at this offset (zero-based).
 
-## Context.io.getListThreadsIncludeContact
+## ContextIO.getListThreadsIncludeContact
 List threads where a specific contact(s) is present in the recipient list.
 
 | Field         | Type       | Description
@@ -572,7 +572,7 @@ List threads where a specific contact(s) is present in the recipient list.
 | limit         | Number     | The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.
 | offset        | Number     | Start the list at this offset (zero-based).
 
-## Context.io.getAllFiles
+## ContextIO.getAllFiles
 The name of a source in Context.IO is called a “label”. The label will be included in the response when you get account or source details and looks something like `email::provider`.
 
 | Field            | Type       | Description
@@ -597,7 +597,7 @@ The name of a source in Context.IO is called a “label”. The label will be in
 | limit            | Number     | The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.
 | offset           | Number     | Start the list at this offset (zero-based).
 
-## Context.io.getFileDetails
+## ContextIO.getFileDetails
 Get details about a specific file.
 
 | Field         | Type       | Description
@@ -607,7 +607,7 @@ Get details about a specific file.
 | accountId     | String     | Unique id of an account.
 | fileId        | String     | Unique id of a file.
 
-## Context.io.downloadFilesContents
+## ContextIO.downloadFilesContents
 There are a couple ways you can download the file itself from the API.Get the file itself in the response;Get an AWS link you can use to download the file;
 
 | Field         | Type       | Description
@@ -618,7 +618,7 @@ There are a couple ways you can download the file itself from the API.Get the fi
 | fileId        | String     | Unique id of a file.
 | asLink        | Select     | Set to `true`, get an AWS link you can use to download the file.
 
-## Context.io.discoveringImapSettings
+## ContextIO.discoveringImapSettings
 If you prefer to handle your own authentication and add accounts or sources manually, you may want to check for IMAP configuration settings to add users. The Discovery endpoint returns known IMAP configuration settings given an email address.
 
 | Field         | Type       | Description
@@ -628,7 +628,7 @@ If you prefer to handle your own authentication and add accounts or sources manu
 | sourceType    | Select     | The type of source you want to discover settings for.
 | email         | String     | An email address you want to discover IMAP settings for.
 
-## Context.io.getAllOauthProviders
+## ContextIO.getAllOauthProviders
 List all oauth providers linked to your Context.IO API key.
 
 | Field         | Type       | Description
@@ -636,7 +636,7 @@ List all oauth providers linked to your Context.IO API key.
 | consumerKey   | credentials| The consumer key from your account.
 | consumerSecret| credentials| The consumer secret from your account.
 
-## Context.io.createOauthProvider
+## ContextIO.createOauthProvider
 Add an oauth provider.
 
 | Field                 | Type       | Description
@@ -647,7 +647,7 @@ Add an oauth provider.
 | providerConsumerKey   | String     | The OAuth2 Client ID.
 | providerConsumerSecret| String     | The OAuth2 Client Secret
 
-## Context.io.getOauthProviderDetails
+## ContextIO.getOauthProviderDetails
 Get information about an oauth provider.
 
 | Field              | Type       | Description
@@ -656,7 +656,7 @@ Get information about an oauth provider.
 | consumerSecret     | credentials| The consumer secret from your account.
 | providerConsumerKey| String     | The consumer key for this external OAuth provider
 
-## Context.io.deleteOauthProvider
+## ContextIO.deleteOauthProvider
 Delete an oauth provider.
 
 | Field              | Type       | Description

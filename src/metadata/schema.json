@@ -1,9 +1,9 @@
 {
     "package": "ContextIO",
-    "tagline": "Context.io API",
+    "tagline": "ContextIO API",
     "description": "Context.IO is a modern, scalable email API that brings IMAP into the 21st century.Enrich your application with email data: contacts, attachments, receipts, reservations, travel information, and much more.Context.IO can connect to any IMAP enabled email including Gmail, Google Apps, Outlook, Yahoo, AOL, and more.Get near real-time notifications for new and sent messages via webhooks. We offer rich filtering features to ensure you only get the data you need.Context.IO is free to use for most cases, but we offer flexible pricing tiers for companies of any size.",
     "image": "https:\/\/logo.clearbit.com\/context.io",
-    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-Context.io-Package",
+    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-ContextIO-Package",
     "keywords": [
         "API",
         "Email",
