@@ -1775,7 +1775,7 @@
                         "unparsed"
                     ],
                     "info": "By default, this returns messages headers parsed into an array. Set this parameter to `unparsed` to get raw unparsed headers.",
-                    "required": true
+                    "required": false
                 }
             ],
             "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/headers",

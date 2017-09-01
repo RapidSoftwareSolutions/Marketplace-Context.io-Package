@@ -9,7 +9,7 @@ $app->post('/api/ContextIO/getMessageHeaders', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['consumerKey','consumerSecret','accountId','messageId','raw']);
+    $validateRes = $checkRequest->validate($request, ['consumerKey','consumerSecret','accountId','messageId']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -17,8 +17,8 @@ $app->post('/api/ContextIO/getMessageHeaders', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','messageId'=>'message_id','raw'=>'raw'];
-    $optionalParams = [];
+    $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','messageId'=>'message_id'];
+    $optionalParams = ['raw' => 'raw'];
     $bodyParams = [
        'query' => ['consumer_secret','consumer_key','id','message_id','raw']
     ];
