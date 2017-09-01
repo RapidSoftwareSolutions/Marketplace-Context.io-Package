@@ -29,8 +29,8 @@ You can create an account with no source by only passing in the email param. If 
 | email               | String     | The primary email address used to receive emails in this account.
 | firstName           | String     | First name of the account holder.
 | lastName            | String     | Last name of the account holder.
-| syncAllFolders      | Select     | By default, we filter out some folders like ‘Deleted Items’ and 'Drafts’. Set this parameter to `off` to turn off this filtering and show every single folder.
-| expungeOnDeletedFlag| Select     | By default, we don’t filter out messages flagged as deleted. Set this parameter to `on` to turn on this filtering.
+| syncAllFolders      | Select     | By default, we filter out some folders like ‘Deleted Items’ and 'Drafts’. Set this parameter to `off` to turn off this filtering and show every single folder.Options - only `off`.
+| expungeOnDeletedFlag| Select     | By default, we don’t filter out messages flagged as deleted. Set this parameter to `on` to turn on this filtering.Options - only 'on'.
 | callbackUrl         | String     | If specified, we’ll make a POST request to this URL when the initial sync is completed. 
 | statusCallbackUrl   | String     | If specified, we’ll make a POST request to this URL if the connection status of the source changes. 
 
@@ -49,14 +49,14 @@ Use this endpoint to add a source to an existing account. An account id is requi
 | port                | Number     | Port number to connect to on the server. For most servers, SSL is 993, and unencrypted (non-SSL) is 143. 
 | type                | Select     | Currently, the only supported type is IMAP.
 | originIp            | String     | IP address of the end user requesting the account to be created
-| syncAllFolders      | Select     | By default, we filter out some folders like ‘Deleted Items’ and 'Drafts’. Set this parameter to `off` to turn off this filtering and show every single folder.
-| expungeOnDeletedFlag| Select     | By default, we don’t filter out messages flagged as deleted. Set this parameter to `on` to turn on this filtering.
+| syncAllFolders      | Select     | By default, we filter out some folders like ‘Deleted Items’ and 'Drafts’. Set this parameter to `off` to turn off this filtering and show every single folder.Options - only `off`.
+| expungeOnDeletedFlag| Select     | By default, we don’t filter out messages flagged as deleted. Set this parameter to `on` to turn on this filtering.Options - only `on`.
 | password            | String     | Password for this source. Required when creating a source and account in a single call. Ignored if any of the provider_* parameters are set below.
 | providerRefreshToken| String     | An OAuth2 refresh token obtained from the IMAP account provider to authenticate this email account. Required if using oauth when creating a source and account in a single call.
 | providerConsumerKey | String     | The OAuth2 Client ID used to obtain the the refresh token for the above account. Required if using oauth when creating a source and account in a single call. 
 | callbackUrl         | String     | If specified, we’ll make a POST request to this URL when the initial sync is completed. 
 | statusCallbackUrl   | String     | If specified, we’ll make a POST request to this URL if the connection status of the source changes. 
-| rawFileList         | Select     | By default, we filter out files like signature images or those winmail.dat files form the files list. Set this parameter to `off` to turn off this filtering and show every single file attachments.
+| rawFileList         | Select     | By default, we filter out files like signature images or those winmail.dat files form the files list. Set this parameter to `off` to turn off this filtering and show every single file attachments.Options - only `off`.
 
 ## ContextIO.deleteAccount
 If you need to delete an account, you can do so by using this endpoint. This will delete the account and all sources associated with it.
@@ -90,9 +90,9 @@ Connect tokens are a feature we provide to facilitate account creation.
 | lastName                  | String     | Last name of the account holder.
 | sourceCallbackUrl         | String     | If specified, we’ll make a POST request to this URL when the initial sync is completed.
 | sourceExpungeOnDeletedFlag| Select     | By default, we don’t filter out messages flagged as deleted. Set this parameter to `on` to turn on this filtering.
-| sourceSyncAllFolders      | Select     | By default, we filter out some folders like ‘Deleted Items’ and 'Drafts’. Set this parameter to `off` to turn off this filtering and show every single folder.
-| sourceSyncFolders         | Select     | By default, we filter out some folders like 'Deleted Items’ and 'Drafts’. Set this parameter to `All`,`Trash` to show the 'Deleted Items’ folder.
-| sourceRawFileList         | Select     | By default, we filter out files like signature images or those winmail.dat files form the files list. Set this parameter to 1 to turn off this filtering and show every single file attachments.
+| sourceSyncAllFolders      | Select     | By default, we filter out some folders like ‘Deleted Items’ and 'Drafts’. Set this parameter to `off` to turn off this filtering and show every single folder.Options - only `off`.
+| sourceSyncFolders         | Select     | By default, we filter out some folders like 'Deleted Items’ and 'Drafts’. Set this parameter to `All`,`Trash` to show the 'Deleted Items’ folder.Options - All,Trash.
+| sourceRawFileList         | Select     | By default, we filter out files like signature images or those winmail.dat files form the files list. Set this parameter to `off` to turn off this filtering and show every single file attachments.Options - only `off`.
 | statusCallbackUrl         | String     | If specified, we’ll make a POST request to this URL if the connection status of the source changes. 
 
 ## ContextIO.getConnectTokenDetails
@@ -141,8 +141,8 @@ If the account has more than once source, this endpoint will list all sources as
 | consumerKey   | credentials| The consumer key from your account.
 | consumerSecret| credentials| The consumer secret from your account.
 | accountId     | String     | Unique id of an account.
-| status        | Select     | Only return sources whose status is of a specific value.
-| statusOk      | Select     | Set to `false` to get sources that are not working correctly. Set to `true` to get those that are.
+| status        | Select     | Only return sources whose status is of a specific value. Opions - "INVALID_CREDENTIALS","CONNECTION_IMPOSSIBLE", "OK", "TEMP_DISABLED", "DISABLED".                                                                                                                    
+| statusOk      | Select     | Set to `false` to get sources that are not working correctly. Set to `true` to get those that are. OPtions - true,false.
 
 ## ContextIO.getSourceDetail
 The name of a source in Context.IO is called a “label”. The label will be included in the response when you get account or source details and looks something like `email::provider`.
@@ -182,8 +182,8 @@ List all messages in the account (including all sources associated with the acco
 | includeHeaders   | Select     | Can be set to `false` (default), `true` or raw. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
 | includeFlags     | Select     | Set to `true` to include thread size in the result.
 | bodyType         | String     | Used when includeBody is set to get only body parts of a given MIME-type (for example text/html).
-| includeSource    | Select     | Set to 1 to include message sources in the result. Since message sources must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
-| sortOrder        | Select     | The sort order of the returned results.
+| includeSource    | Select     | Set to 'true' to include message sources in the result. Since message sources must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
+| sortOrder        | Select     | The sort order of the returned results. OPtions - asc,desc.
 | limit            | Number     | The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.
 | offset           | Number     | Start the list at this offset (zero-based).
 
@@ -196,12 +196,12 @@ Get an individual message based on a `messageId`. You can use either a `messageI
 | consumerSecret   | credentials| The consumer secret from your account.
 | accountId        | String     | Unique id of an account.
 | messageId        | String     | Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.
-| includeThreadSize| Select     | Set to `true` to include thread size in the result.
-| includeBody      | Select     | Set to `true` to include message bodies in the result. Since message bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
-| includeHeaders   | Select     | Can be set to `false` (default), `true` or raw. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
-| includeFlags     | Select     | Set to `true` to include thread size in the result.
+| includeThreadSize| Select     | Set to `true` to include thread size in the result.Options - only `true`.
+| includeBody      | Select     | Set to `true` to include message bodies in the result. Since message bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.Options - only `true`.
+| includeHeaders   | Select     | Can be set to `false` (default), `true` or raw. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.Options - true,false.
+| includeFlags     | Select     | Set to `true` to include thread size in the result. Options - only 'true'.
 | bodyType         | String     | Used when includeBody is set to get only body parts of a given MIME-type (for example text/html).
-| includeSource    | Select     | Set to 1 to include message sources in the result. Since message sources must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
+| includeSource    | Select     | Set to 'true' to include message sources in the result. Since message sources must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
 
 ## ContextIO.getFolderMessages
 Listing messages from a specific folder.Alterntively, you can also perform the following call by source. This call bypases our cache of the account, so expect a performance hit.

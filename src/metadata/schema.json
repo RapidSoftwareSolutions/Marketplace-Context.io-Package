@@ -601,7 +601,7 @@
                     "required": true
                 }
             ],
-            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/connect_tokens\/{$data['token']}",
+            "url": "https://api.context.io/2.0/connect_tokens/{$data['token']}",
             "request": {
                 "method": "get",
                 "params": [
@@ -710,7 +710,7 @@
                     "required": true
                 }
             ],
-            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/sources\/{$data['label']}",
+            "url": "https://api.context.io/2.0/accounts/{$data['id']}/sources/{$data['label']}/connect_tokens",
             "request": {
                 "method": "get",
                 "params": [
@@ -1477,7 +1477,7 @@
                     "required": false
                 }
             ],
-            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/body",
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/messages\/{$data['message_id']}\/body",
             "request": {
                 "method": "get",
                 "params": [
@@ -1537,7 +1537,7 @@
                     "required": true
                 }
             ],
-            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/flags",
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/messages\/{$data['message_id']}\/flags",
             "request": {
                 "method": "get",
                 "params": [
@@ -1646,7 +1646,7 @@
                     "required": false
                 }
             ],
-            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/flags",
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/messages\/{$data['message_id']}\/flags",
             "request": {
                 "method": "post",
                 "params": [
@@ -1710,7 +1710,7 @@
                     "required": true
                 }
             ],
-            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/folders",
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/messages\/{$data['message_id']}\/folders",
             "request": {
                 "method": "get",
                 "params": [
@@ -1778,7 +1778,7 @@
                     "required": false
                 }
             ],
-            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/headers",
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/messages\/{$data['message_id']}\/headers",
             "request": {
                 "method": "get",
                 "params": [
@@ -1838,7 +1838,7 @@
                     "required": true
                 }
             ],
-            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/source",
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/messages\/{$data['message_id']}\/source",
             "request": {
                 "method": "get",
                 "params": [
@@ -1968,7 +1968,7 @@
                     "required": false
                 }
             ],
-            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/message\/{$data['message_id']}\/thread",
+            "url": "https:\/\/api.context.io\/2.0\/accounts\/{$data['id']}\/messages\/{$data['message_id']}\/thread",
             "request": {
                 "method": "get",
                 "params": [
