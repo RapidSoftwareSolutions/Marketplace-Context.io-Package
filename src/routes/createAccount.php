@@ -54,6 +54,9 @@ $app->post('/api/ContextIO/createAccount', function ($request, $response) {
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];
 
+    print_r($data);
+    exit();
+
     try {
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();

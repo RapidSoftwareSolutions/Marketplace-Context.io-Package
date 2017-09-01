@@ -57,10 +57,13 @@ $app->post('/api/ContextIO/connectTokensWizard', function ($request, $response) 
         'handler' => $stack,
         'auth' => 'oauth'
     ]);
+
+
     $query_str = "https://api.context.io/2.0/connect_tokens";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];
+
 
     try {
         $resp = $client->post($query_str, $requestParams);
