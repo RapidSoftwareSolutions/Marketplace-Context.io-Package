@@ -3,7 +3,7 @@
     "tagline": "ContextIO API",
     "description": "Context.IO is a modern, scalable email API that brings IMAP into the 21st century.Enrich your application with email data: contacts, attachments, receipts, reservations, travel information, and much more.Context.IO can connect to any IMAP enabled email including Gmail, Google Apps, Outlook, Yahoo, AOL, and more.Get near real-time notifications for new and sent messages via webhooks. We offer rich filtering features to ensure you only get the data you need.Context.IO is free to use for most cases, but we offer flexible pricing tiers for companies of any size.",
     "image": "https:\/\/logo.clearbit.com\/context.io",
-    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-ContextIO-Package",
+    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-Context.io-Package",
     "keywords": [
         "API",
         "Email",
@@ -1177,6 +1177,134 @@
                     "name": "error",
                     "info": "Error"
                 },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getFolderMessages",
+            "description": "Listing messages from a specific folder.",
+            "args": [{
+                "name": "consumerKey",
+                "vendorName": "consumer_key",
+                "type": "credentials",
+                "info": "The consumer key from your account.",
+                "required": true
+            },
+                {
+                    "name": "consumerSecret",
+                    "vendorName": "consumer_secret",
+                    "type": "credentials",
+                    "info": "The consumer secret from your account.",
+                    "required": true
+                },
+                {
+                    "name": "accountId",
+                    "vendorName": "id",
+                    "type": "String",
+                    "info": "Unique id of an account.",
+                    "required": true
+                },
+                {
+                    "name": "sourceLabel",
+                    "vendorName": "label",
+                    "type": "String",
+                    "info": "The label property of the source instance. You can use 0 as an alias for the first source of an account.",
+                    "required": true
+                },
+                {
+                    "name": "folder",
+                    "type": "String",
+                    "info": "The full folder path using / as the path hierarchy delimiter.",
+                    "required": true
+                },
+                {
+                    "name": "includeThreadSize",
+                    "vendorName": "include_thread_size",
+                    "type": "Select",
+                    "options": ["true"],
+                    "info": "Set to `true` to include thread size in the result.",
+                    "required": false
+                },
+                {
+                    "name": "includeBody",
+                    "vendorName": "include_body",
+                    "type": "Select",
+                    "options": ["true"],
+                    "info": "Set to `true` to include message bodies in the result. Since message bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "includeHeaders",
+                    "vendorName": "include_headers",
+                    "type": "Select",
+                    "options": ["true", "false"],
+                    "info": "Can be set to `false` (default), `true` or raw. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "required": false
+                },
+                {
+                    "name": "includeFlags",
+                    "vendorName": "include_flags",
+                    "type": "Select",
+                    "options": ["true"],
+                    "info": "Set to `true` to include thread size in the result.",
+                    "required": false
+                },
+                {
+                    "name": "bodyType",
+                    "vendorName": "body_type",
+                    "type": "String",
+                    "info": "Used when includeBody is set to get only body parts of a given MIME-type (for example text/html).",
+                    "required": false
+                },
+                {
+                    "name": "flagSeen",
+                    "vendorName": "flag_seen",
+                    "type": "Select",
+                    "options": ["set", "unset"],
+                    "info": "Message has been read. Set this parameter to `set` to set the flag, `unset` to unset it.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.",
+                    "required": false
+                },
+                {
+                    "name": "offset",
+                    "type": "Number",
+                    "info": "Start the list at this offset (zero-based).",
+                    "required": false
+                }
+            ],
+            "url": "https://api.context.io/2.0/accounts/{$data['id']}/sources/{$data['label']}/folders/{$data['folder']}/messages",
+            "request": {
+                "method": "get",
+                "params": [{
+                    "paramsType": "query",
+                    "bodyParams": [
+                        "consumer_secret",
+                        "consumer_key",
+                        "id",
+                        "label",
+                        "include_thread_size",
+                        "include_body",
+                        "include_headers",
+                        "include_flags",
+                        "body_type",
+                        "flag_seen",
+                        "limit",
+                        "offset"
+                    ]
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"

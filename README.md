@@ -203,6 +203,26 @@ Get an individual message based on a `messageId`. You can use either a `messageI
 | bodyType         | String     | Used when includeBody is set to get only body parts of a given MIME-type (for example text/html).
 | includeSource    | Select     | Set to 1 to include message sources in the result. Since message sources must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
 
+## ContextIO.getFolderMessages
+Listing messages from a specific folder.Alterntively, you can also perform the following call by source. This call bypases our cache of the account, so expect a performance hit.
+
+| Field            | Type       | Description
+|------------------|------------|----------
+| consumerKey      | credentials| The consumer key from your account.
+| consumerSecret   | credentials| The consumer secret from your account.
+| accountId        | String     | Unique id of an account.
+| sourceLabel        | String     | The label property of the source instance. You can use 0 as an alias for the first source of an account.
+| folder        | String     |  The full folder path using / as the path hierarchy delimiter.
+| includeThreadSize| Select     | Set to `true` to include thread size in the result.
+| includeBody      | Select     | Set to `true` to include message bodies in the result. Since message bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
+| includeHeaders   | Select     | Can be set to `false` (default), `true` or raw. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
+| includeFlags     | Select     | Set to `true` to include thread size in the result.
+| bodyType         | String     | Used when includeBody is set to get only body parts of a given MIME-type (for example text/html).
+| flagSeen      | Select     | Message has been read. Set this parameter to `set` to set the flag, `unset` to unset it.
+| limit            | Number     | The maximum number of results to return. The maximum limit is 100. The default if no limit is provided is 25.
+| offset           | Number     | Start the list at this offset (zero-based).
+
+
 ## ContextIO.getMessageBody
 The name of a source in Context.IO is called a “label”. The label will be included in the response when you get account or source details and looks something like `email::provider`.
 
