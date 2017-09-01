@@ -38,7 +38,8 @@ $app->post('/api/ContextIO/getConnectTokenDetails', function ($request, $respons
         'auth' => 'oauth'
     ]);
 
-    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/connect_tokens/{$data['token']}";
+    $query_str = "https://api.context.io/2.0/connect_tokens/{$data['token']}";
+
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];

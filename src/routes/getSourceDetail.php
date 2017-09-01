@@ -39,6 +39,8 @@ $app->post('/api/ContextIO/getSourceDetail', function ($request, $response) {
         'auth' => 'oauth'
     ]);
 
+  //  $data['label'] = urlencode($data['label']);
+
     $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/sources/{$data['label']}";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);

@@ -39,7 +39,7 @@ $app->post('/api/ContextIO/getAllConnectTokensForSource', function ($request, $r
     ]);
 
 
-    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/sources/{$data['label']}";
+    $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/sources/{$data['label']}/connect_tokens";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];
