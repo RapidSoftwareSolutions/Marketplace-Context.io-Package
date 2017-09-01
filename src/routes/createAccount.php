@@ -40,6 +40,7 @@ $app->post('/api/ContextIO/createAccount', function ($request, $response) {
     $middleware = new Oauth1([
         'consumer_key' => $data['consumer_key'],
         'consumer_secret' => $data['consumer_secret'],
+        'token_secret' => ''
     ]);
 
     $stack->push($middleware);
@@ -103,9 +104,7 @@ $app->post('/api/ContextIO/createAccount', function ($request, $response) {
         $result['contextWrites']['to']['status_msg'] = 'Something went wrong inside the package.';
 
     }
-
-    print_r($result);
-    exit();
+    
 
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
 
