@@ -54,8 +54,6 @@ $app->post('/api/ContextIO/createAccount', function ($request, $response) {
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];
 
-    print_r($data);
-    exit();
 
     try {
         $resp = $client->post($query_str, $requestParams);
@@ -105,6 +103,9 @@ $app->post('/api/ContextIO/createAccount', function ($request, $response) {
         $result['contextWrites']['to']['status_msg'] = 'Something went wrong inside the package.';
 
     }
+
+    print_r($result);
+    exit();
 
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
 
