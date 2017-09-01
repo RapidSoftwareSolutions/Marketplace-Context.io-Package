@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/deleteUserLevelWebhook', function ($request, $respons
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','webhookId'=>'webhook_id'];
     $optionalParams = [];
     $bodyParams = [
-       'form_params' => ['consumer_secret','consumer_key','id','webhook_id']
+       'query' => ['consumer_secret','consumer_key','id','webhook_id']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

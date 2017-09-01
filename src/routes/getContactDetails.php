@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/getContactDetails', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','email'=>'email'];
     $optionalParams = [];
     $bodyParams = [
-       'form_params' => ['consumer_secret','consumer_key','id','email']
+       'query' => ['consumer_secret','consumer_key','id','email']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

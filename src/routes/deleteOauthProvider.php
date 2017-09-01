@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/deleteOauthProvider', function ($request, $response) 
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','providerConsumerKey'=>'key'];
     $optionalParams = [];
     $bodyParams = [
-       'form_params' => ['consumer_secret','consumer_key','key']
+       'query' => ['consumer_secret','consumer_key','key']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

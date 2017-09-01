@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/deleteAccount', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id'];
     $optionalParams = [];
     $bodyParams = [
-       'form_params' => ['consumer_secret','consumer_key','id']
+       'query' => ['consumer_secret','consumer_key','id']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

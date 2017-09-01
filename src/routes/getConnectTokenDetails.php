@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/getConnectTokenDetails', function ($request, $respons
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','token'=>'token'];
     $optionalParams = [];
     $bodyParams = [
-       'form_params' => ['consumer_secret','consumer_key','id','token']
+       'query' => ['consumer_secret','consumer_key','id','token']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

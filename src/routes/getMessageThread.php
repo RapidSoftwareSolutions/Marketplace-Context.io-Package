@@ -21,7 +21,7 @@ $app->post('/api/ContextIO/getMessageThread', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','messageId'=>'message_id'];
     $optionalParams = ['includeBody'=>'include_body','includeHeaders'=>'include_headers','includeFlags'=>'include_flags','bodyType'=>'body_type','includeSource'=>'include_source','sortOrder'=>'sort_order','limit'=>'limit','offset'=>'offset'];
     $bodyParams = [
-       'form_params' => ['consumer_secret','consumer_key','id','message_id','include_body','include_headers','include_flags','body_type','include_source','sort_order','limit','offset']
+       'query' => ['consumer_secret','consumer_key','id','message_id','include_body','include_headers','include_flags','body_type','include_source','sort_order','limit','offset']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

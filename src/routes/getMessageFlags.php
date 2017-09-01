@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/getMessageFlags', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','messageId'=>'message_id'];
     $optionalParams = [];
     $bodyParams = [
-       'form_params' => ['consumer_secret','consumer_key','id','message_id']
+       'query' => ['consumer_secret','consumer_key','id','message_id']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

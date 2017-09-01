@@ -19,7 +19,7 @@ $app->post('/api/ContextIO/getAllSources', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id'];
     $optionalParams = ['status'=>'status','statusOk'=>'status_ok'];
     $bodyParams = [
-       'form_params' => ['consumer_secret','consumer_key','id','status','status_ok']
+       'query' => ['consumer_secret','consumer_key','id','status','status_ok']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/getFolderMessages', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','sourceLabel'=>'label','folder'=>'folder'];
     $optionalParams = ['includeThreadSize'=>'include_thread_size','includeBody'=>'include_body','includeHeaders'=>'include_headers','includeFlags'=>'include_flags','bodyType'=>'body_type','flagSeen'=>'flag_seen','limit'=>'limit','offset'=>'offset'];
     $bodyParams = [
-       'form_params' => ['consumer_secret','consumer_key','id','label','include_thread_size','include_body','include_headers','include_flags','body_type','flag_seen','limit','offset']
+       'query' => ['consumer_secret','consumer_key','id','label','include_thread_size','include_body','include_headers','include_flags','body_type','flag_seen','limit','offset']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

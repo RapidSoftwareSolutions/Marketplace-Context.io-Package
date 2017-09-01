@@ -21,7 +21,7 @@ $app->post('/api/ContextIO/getSourceFolder', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','sourceLabel'=>'source','folder'=>'folder'];
     $optionalParams = ['delimiter'=>'delim','includeExtendedCounts'=>'include_extended_counts'];
     $bodyParams = [
-       'form_params' => ['consumer_secret','consumer_key','id','folder','include_extended_counts','delim']
+       'query' => ['consumer_secret','consumer_key','id','folder','include_extended_counts','delim']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
