@@ -21,7 +21,7 @@ $app->post('/api/ContextIO/getAllSourceFolders', function ($request, $response) 
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','sourceLabel'=>'source'];
     $optionalParams = ['includeExtendedCounts'=>'include_extended_counts','noCache'=>'no_cache'];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','id','source','include_extended_counts','no_cache']
+       'form_params' => ['consumer_secret','consumer_key','id','source','include_extended_counts','no_cache']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

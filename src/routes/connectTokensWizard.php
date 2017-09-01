@@ -22,7 +22,7 @@ $app->post('/api/ContextIO/connectTokensWizard', function ($request, $response) 
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','callbackUrl'=>'callback_url'];
     $optionalParams = ['email'=>'email','firstName'=>'first_name','lastName'=>'last_name','sourceCallbackUrl'=>'source_callback_url','sourceExpungeOnDeletedFlag'=>'source_expunge_on_deleted_flag','sourceSyncAllFolders'=>'source_sync_all_folders','sourceSyncFolders'=>'source_sync_folders','sourceRawFileList'=>'source_raw_file_list','statusCallbackUrl'=>'status_callback_url'];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','callback_url','email','first_name','last_name','source_callback_url','source_expunge_on_deleted_flag','source_sync_all_folders','source_sync_folders','source_raw_file_list','status_callback_url']
+       'form_params' => ['consumer_secret','consumer_key','callback_url','email','first_name','last_name','source_callback_url','source_expunge_on_deleted_flag','source_sync_all_folders','source_sync_folders','source_raw_file_list','status_callback_url']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

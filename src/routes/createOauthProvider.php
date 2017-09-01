@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/createOauthProvider', function ($request, $response) 
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','type'=>'type','providerConsumerKey'=>'provider_consumer_key','providerConsumerSecret'=>'provider_consumer_secret'];
     $optionalParams = [];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','type','provider_consumer_key','provider_consumer_secret']
+       'form_params' => ['consumer_secret','consumer_key','type','provider_consumer_key','provider_consumer_secret']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
@@ -29,6 +29,7 @@ $app->post('/api/ContextIO/createOauthProvider', function ($request, $response) 
     $middleware = new Oauth1([
         'consumer_key' => $data['consumer_key'],
         'consumer_secret' => $data['consumer_secret'],
+        'token_secret' => ''
     ]);
 
     $stack->push($middleware);
@@ -42,6 +43,8 @@ $app->post('/api/ContextIO/createOauthProvider', function ($request, $response) 
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];
+
+  // $requestParams['query']['provider_consumer_key']= 1;
 
     try {
         $resp = $client->post($query_str, $requestParams);
@@ -91,6 +94,9 @@ $app->post('/api/ContextIO/createOauthProvider', function ($request, $response) 
         $result['contextWrites']['to']['status_msg'] = 'Something went wrong inside the package.';
 
     }
+
+
+
 
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
 

@@ -21,7 +21,7 @@ $app->post('/api/ContextIO/getFilesSharedWithContact', function ($request, $resp
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','email'=>'email'];
     $optionalParams = ['limit'=>'limit','offset'=>'offset'];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','id','email','limit','offset']
+       'form_params' => ['consumer_secret','consumer_key','id','email','limit','offset']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

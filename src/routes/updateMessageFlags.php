@@ -21,7 +21,7 @@ $app->post('/api/ContextIO/updateMessageFlags', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','messageId'=>'message_id'];
     $optionalParams = ['seen'=>'seen','answered'=>'answered','flagged'=>'flagged','deleted'=>'deleted','draft'=>'draft'];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','id','message_id','seen','answered','flagged','deleted','draft']
+       'form_params' => ['consumer_secret','consumer_key','id','message_id','seen','answered','flagged','deleted','draft']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

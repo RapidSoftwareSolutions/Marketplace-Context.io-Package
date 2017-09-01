@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/getAllContacts', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id'];
     $optionalParams = ['search'=>'search','activeBefore'=>'active_before','activeAfter'=>'active_after','sortBy'=>'sort_by','sortOrder'=>'sort_order','limit'=>'limit','offset'=>'offset'];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','id','search','active_before','active_after','sort_by','sort_order','limit','offset']
+       'form_params' => ['consumer_secret','consumer_key','id','search','active_before','active_after','sort_by','sort_order','limit','offset']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

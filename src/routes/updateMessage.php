@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/updateMessage', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','messageId'=>'message_id'];
     $optionalParams = ['folderToCopied'=>'dst_folder','sourceLabel'=>'dst_source','move'=>'move','move'=>'move','flagSeen'=>'flag_seen','flagAnswered'=>'flag_answered','flagDeleted'=>'flag_deleted','flagDraft'=>'flag_draft'];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','id','message_id','dst_folder','dst_source','move','flag_seen','flag_answered','flag_deleted','flag_draft']
+       'form_params' => ['consumer_secret','consumer_key','id','message_id','dst_folder','dst_source','move','flag_seen','flag_answered','flag_deleted','flag_draft']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

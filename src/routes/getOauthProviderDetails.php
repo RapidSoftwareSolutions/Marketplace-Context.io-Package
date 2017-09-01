@@ -21,7 +21,7 @@ $app->post('/api/ContextIO/getOauthProviderDetails', function ($request, $respon
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','providerConsumerKey'=>'key'];
     $optionalParams = [];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','key']
+       'form_params' => ['consumer_secret','consumer_key','key']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

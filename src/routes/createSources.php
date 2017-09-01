@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/createSources', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','email'=>'email','username'=>'username','server'=>'server','useSsl'=>'use_ssl','port'=>'port','type'=>'type'];
     $optionalParams = ['originIp'=>'origin_ip','syncAllFolders'=>'sync_all_folders','expungeOnDeletedFlag'=>'expunge_on_deleted_flag','password'=>'password','providerRefreshToken'=>'provider_refresh_token','providerConsumerKey'=>'provider_consumer_key','callbackUrl'=>'callback_url','statusCallbackUrl'=>'status_callback_url','rawFileList'=>'raw_file_list'];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','id','email','server','username','use_ssl','port','type','sync_all_folders','expunge_on_deleted_flag','provider_refresh_token','password','provider_consumer_key','callback_url','status_callback_url','origin_ip','raw_file_list']
+       'form_params' => ['consumer_secret','consumer_key','id','email','server','username','use_ssl','port','type','sync_all_folders','expunge_on_deleted_flag','provider_refresh_token','password','provider_consumer_key','callback_url','status_callback_url','origin_ip','raw_file_list']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

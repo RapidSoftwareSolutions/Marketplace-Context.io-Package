@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/getFileDetails', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','fileId'=>'file_id'];
     $optionalParams = [];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','id','file_id']
+       'form_params' => ['consumer_secret','consumer_key','id','file_id']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

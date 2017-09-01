@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/createUserLevelWebhook', function ($request, $respons
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id','callbackUrl'=>'callback_url','failureNotifyUrl'=>'failure_notif_url'];
     $optionalParams = ['filterTo'=>'filter_to','filterFrom'=>'filter_from','filterEmailList'=>'filter_cc','filterSubject'=>'filter_subject','filterThread'=>'filter_thread','filterFileName'=>'filter_file_name','filterFolderAdded'=>'filter_folder_added','filterFolderRemoved'=>'filter_folder_removed','filterToDomains'=>'filter_to_domain','filterFolderRemoved'=>'filter_folder_removed','includeBody'=>'include_body','bodyType'=>'body_type','includeHeader'=>'include_header','receiveAllChanges'=>'receive_all_changes','receiveDrafts'=>'receive_drafts'];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','id','callback_url','failure_notif_url','filter_to','filter_from','filterEmailList','filter_subject','filter_thread','filter_file_name','filter_folder_added','filter_folder_removed','filter_to_domain','include_body','body_type','include_header','receive_all_changes','receive_drafts']
+       'form_params' => ['consumer_secret','consumer_key','id','callback_url','failure_notif_url','filter_to','filter_from','filterEmailList','filter_subject','filter_thread','filter_file_name','filter_folder_added','filter_folder_removed','filter_to_domain','include_body','body_type','include_header','receive_all_changes','receive_drafts']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/getAllMessages', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','accountId'=>'id'];
     $optionalParams = ['subject'=>'subject','emails'=>'email','to'=>'to','from'=>'from','emailOfContactCC'=>'cc','emailOfContactBCC'=>'bcc','folder'=>'folder','source'=>'source','fileName'=>'file_name','fileSizeMin'=>'file_size_min','fileSizeMax'=>'file_size_max','dateBefore'=>'date_before','dateAfter'=>'date_after','indexedBefore'=>'indexed_before','indexedAfter'=>'indexed_after','includeThreadSize'=>'include_thread_size','includeBody'=>'include_body','includeHeaders'=>'include_headers','includeFlags'=>'include_flags','bodyType'=>'body_type','includeSource'=>'include_source','sortOrder'=>'sort_order','limit'=>'limit','offset'=>'offset'];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','id','subject','email','to','from','cc','bcc','folder','source','file_name','file_size_min','file_size_max','date_before','date_after','indexed_before','indexed_after','include_thread_size','include_body','include_headers','include_flags','body_type','include_source','sort_order','limit','offset']
+       'form_params' => ['consumer_secret','consumer_key','id','subject','email','to','from','cc','bcc','folder','source','file_name','file_size_min','file_size_max','date_before','date_after','indexed_before','indexed_after','include_thread_size','include_body','include_headers','include_flags','body_type','include_source','sort_order','limit','offset']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

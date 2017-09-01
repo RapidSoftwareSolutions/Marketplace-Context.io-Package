@@ -20,7 +20,7 @@ $app->post('/api/ContextIO/createAccount', function ($request, $response) {
     $requiredParams = ['consumerKey'=>'consumer_key','consumerSecret'=>'consumer_secret','email'=>'email'];
     $optionalParams = ['firstName'=>'first_name','lastName'=>'last_name','syncAllFolders'=>'sync_all_folders','expungeOnDeletedFlag'=>'expunge_on_deleted_flag','callbackUrl'=>'callback_url','statusCallbackUrl'=>'status_callback_url'];
     $bodyParams = [
-       'query' => ['consumer_secret','consumer_key','email','first_name','last_name','sync_all_folders','expunge_on_deleted_flag','callback_url','status_callback_url']
+       'form_params' => ['consumer_secret','consumer_key','email','first_name','last_name','sync_all_folders','expunge_on_deleted_flag','callback_url','status_callback_url']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
