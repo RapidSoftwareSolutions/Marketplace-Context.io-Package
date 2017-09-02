@@ -32,7 +32,7 @@ $app->post('/api/ContextIO/getFolderMessages', function ($request, $response) {
         $data['include_body'] = 1;
     }
 
-    if(!empty($data['include_headers']) )
+    if(!empty($data['include_headers']) && $data['include_headers'] != 'raw')
     {
         if($data['include_headers'] == 'true')
         {
@@ -61,6 +61,11 @@ $app->post('/api/ContextIO/getFolderMessages', function ($request, $response) {
     if(!empty($data['include_thread_size']) && $data['include_thread_size'] == 'true')
     {
         $data['include_thread_size'] = 1;
+    }
+
+    if(!empty($data['label']) && $data['label'] == 'first')
+    {
+      $data['label'] = 0;
     }
 
 

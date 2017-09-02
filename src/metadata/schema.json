@@ -404,7 +404,7 @@
                 {
                     "name": "label",
                     "type": "String",
-                    "info": "The label property of the source instance. You can use 0 as an alias for the first source of an account.",
+                    "info": "The label property of the source instance. You can use word `first` as an alias for the first source of an account.",
                     "required": true
                 }
             ],
@@ -1078,7 +1078,8 @@
                     "type": "Select",
                     "options": [
                         "true",
-                        "false"
+                        "false",
+                        "raw"
                     ],
                     "info": "Can be set to `false` (default), `true` or raw. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
                     "required": false
@@ -1211,7 +1212,7 @@
                     "name": "sourceLabel",
                     "vendorName": "label",
                     "type": "String",
-                    "info": "The label property of the source instance. You can use 0 as an alias for the first source of an account.",
+                    "info": "The label property of the source instance. You can use word `first` as an alias for the first source of an account.",
                     "required": true
                 },
                 {
@@ -1240,8 +1241,8 @@
                     "name": "includeHeaders",
                     "vendorName": "include_headers",
                     "type": "Select",
-                    "options": ["true", "false"],
-                    "info": "Can be set to `false` (default), `true` or raw. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "options": ["true", "false","raw"],
+                    "info": "Can be set to `false` (default), `true` or `raw`. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
                     "required": false
                 },
                 {
@@ -1369,9 +1370,10 @@
                     "type": "Select",
                     "options": [
                         "true",
-                        "false"
+                        "false",
+                        "raw"
                     ],
-                    "info": "Can be set to `false` (default), `true` or raw. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "info": "Can be set to `false` (default), `true` or `raw`. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
                     "required": false
                 },
                 {
@@ -1565,7 +1567,7 @@
         },
         {
             "name": "updateMessageFlags",
-            "description": "This call will allow you to set or unset flags for a specific message.",
+            "description": "This call will allow you to set or unset flags for a specific message.To update the Messagge Flags, you must specify one of the parameters - seen,answered,flagged,deleted,draft.",
             "args": [
                 {
                     "name": "consumerKey",
@@ -1912,9 +1914,10 @@
                     "type": "Select",
                     "options": [
                         "true",
-                        "false"
+                        "false",
+                        "raw"
                     ],
-                    "info": "Can be set to `false` (default), `true` or raw. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
+                    "info": "Can be set to `false` (default), `true` or `raw`. If set to `true`, complete message headers, parsed into an array, are included in the results. If set to raw, the headers are also included but as a raw unparsed string. Since full original headers bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.",
                     "required": false
                 },
                 {
@@ -2039,7 +2042,7 @@
                     "vendorName": "dst_folder",
                     "type": "String",
                     "info": "The folder within dst_source the message should be copied to.",
-                    "required": false
+                    "required": true
                 },
                 {
                     "name": "sourceLabel",
@@ -2172,7 +2175,7 @@
                     "vendorName": "dst_folder",
                     "type": "String",
                     "info": "The folder within dst_source the message should be copied to.",
-                    "required": false
+                    "required": true
                 },
                 {
                     "name": "sourceLabel",
@@ -2288,7 +2291,7 @@
                     "name": "sourceLabel",
                     "vendorName": "source",
                     "type": "String",
-                    "info": "The label property of the source instance. You can use 0 as an alias for the first source of an account.",
+                    "info": "The label property of the source instance. You can use word `first` as an alias for the first source of an account.",
                     "required": true
                 },
                 {
@@ -2369,7 +2372,7 @@
                     "name": "sourceLabel",
                     "vendorName": "source",
                     "type": "String",
-                    "info": "The label property of the source instance. You can use 0 as an alias for the first source of an account.",
+                    "info": "The label property of the source instance. You can use word first`` as an alias for the first source of an account.",
                     "required": true
                 },
                 {

@@ -50,6 +50,12 @@ $app->post('/api/ContextIO/getAllSourceFolders', function ($request, $response) 
         'auth' => 'oauth'
     ]);
 
+    if(!empty($data['source']) && $data['source'] == 'first')
+    {
+      $data['source'] = 0;
+    }
+
+
     $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/sources/{$data['source']}/folders";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);

@@ -60,7 +60,7 @@ $app->post('/api/ContextIO/getAllMessages', function ($request, $response) {
         $data['include_body'] = 1;
     }
 
-    if(!empty($data['include_headers']) )
+    if(!empty($data['include_headers']) && $data['include_headers'] != 'raw')
     {
         if($data['include_headers'] == 'true')
         {
@@ -68,7 +68,6 @@ $app->post('/api/ContextIO/getAllMessages', function ($request, $response) {
         } else {
             $data['include_headers'] = 0;
         }
-
     }
 
     if(!empty($data['include_flags']) && $data['include_flags'] == 'true')

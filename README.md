@@ -5,20 +5,20 @@ ContextIO is a modern, scalable email API that brings IMAP into the 21st century
 * Domain: [context.com](https://context.io/)
 * Credentials: consumerKey, consumerSecret
 
-## How to get credentials: 
+## How to get credentials:
 1. Register on the [context.com](https://context.io/).
 2. After register, in [console](https://console.context.io/), you will see OAuth consumer key and secret.
- 
- 
-## Custom datatypes: 
+
+
+## Custom datatypes:
  |Datatype|Description|Example
  |--------|-----------|----------
  |Datepicker|String which includes date and time|```2016-05-28 00:00:00```
  |Map|String which includes latitude and longitude coma separated|```50.37, 26.56```
- |List|Simple array|```["123", "sample"]``` 
+ |List|Simple array|```["123", "sample"]```
  |Select|String with predefined values|```sample```
  |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
- 
+
 ## ContextIO.createAccount
 You can create an account with no source by only passing in the email param. If you choose this option, you will need to add a source later.
 
@@ -31,8 +31,8 @@ You can create an account with no source by only passing in the email param. If 
 | lastName            | String     | Last name of the account holder.
 | syncAllFolders      | Select     | By default, we filter out some folders like ‘Deleted Items’ and 'Drafts’. Set this parameter to `off` to turn off this filtering and show every single folder.Options - only `off`.
 | expungeOnDeletedFlag| Select     | By default, we don’t filter out messages flagged as deleted. Set this parameter to `on` to turn on this filtering.Options - only 'on'.
-| callbackUrl         | String     | If specified, we’ll make a POST request to this URL when the initial sync is completed. 
-| statusCallbackUrl   | String     | If specified, we’ll make a POST request to this URL if the connection status of the source changes. 
+| callbackUrl         | String     | If specified, we’ll make a POST request to this URL when the initial sync is completed.
+| statusCallbackUrl   | String     | If specified, we’ll make a POST request to this URL if the connection status of the source changes.
 
 ## ContextIO.createSources
 Use this endpoint to add a source to an existing account. An account id is required to add a source to an existing account.
@@ -46,16 +46,16 @@ Use this endpoint to add a source to an existing account. An account id is requi
 | username            | String     | The username used to authenticate an IMAP connection. On some servers, this is the same thing as the primary email address.
 | server              | String     | Name of IP of the IMAP server, eg. imap.gmail.com.
 | useSsl              | Number     | Set to 1 if you want SSL encryption to be used when opening connections to the IMAP server. Any other value will be considered as “do not use SSL”.
-| port                | Number     | Port number to connect to on the server. For most servers, SSL is 993, and unencrypted (non-SSL) is 143. 
+| port                | Number     | Port number to connect to on the server. For most servers, SSL is 993, and unencrypted (non-SSL) is 143.
 | type                | Select     | Currently, the only supported type is IMAP.
 | originIp            | String     | IP address of the end user requesting the account to be created
 | syncAllFolders      | Select     | By default, we filter out some folders like ‘Deleted Items’ and 'Drafts’. Set this parameter to `off` to turn off this filtering and show every single folder.Options - only `off`.
 | expungeOnDeletedFlag| Select     | By default, we don’t filter out messages flagged as deleted. Set this parameter to `on` to turn on this filtering.Options - only `on`.
 | password            | String     | Password for this source. Required when creating a source and account in a single call. Ignored if any of the provider_* parameters are set below.
 | providerRefreshToken| String     | An OAuth2 refresh token obtained from the IMAP account provider to authenticate this email account. Required if using oauth when creating a source and account in a single call.
-| providerConsumerKey | String     | The OAuth2 Client ID used to obtain the the refresh token for the above account. Required if using oauth when creating a source and account in a single call. 
-| callbackUrl         | String     | If specified, we’ll make a POST request to this URL when the initial sync is completed. 
-| statusCallbackUrl   | String     | If specified, we’ll make a POST request to this URL if the connection status of the source changes. 
+| providerConsumerKey | String     | The OAuth2 Client ID used to obtain the the refresh token for the above account. Required if using oauth when creating a source and account in a single call.
+| callbackUrl         | String     | If specified, we’ll make a POST request to this URL when the initial sync is completed.
+| statusCallbackUrl   | String     | If specified, we’ll make a POST request to this URL if the connection status of the source changes.
 | rawFileList         | Select     | By default, we filter out files like signature images or those winmail.dat files form the files list. Set this parameter to `off` to turn off this filtering and show every single file attachments.Options - only `off`.
 
 ## ContextIO.deleteAccount
@@ -75,7 +75,7 @@ If you wish to only delete a certain source from the account, but not delete the
 | consumerKey   | credentials| The consumer key from your account.
 | consumerSecret| credentials| The consumer secret from your account.
 | accountId     | String     | Unique id of an account.
-| label         | String     | The label property of the source instance. You can use 0 as an alias for the first source of an account.
+| label         | String     | The label property of the source instance. You can use word `first` as an alias for the first source of an account.
 
 ## ContextIO.connectTokensWizard
 Connect tokens are a feature we provide to facilitate account creation.
@@ -93,7 +93,7 @@ Connect tokens are a feature we provide to facilitate account creation.
 | sourceSyncAllFolders      | Select     | By default, we filter out some folders like ‘Deleted Items’ and 'Drafts’. Set this parameter to `off` to turn off this filtering and show every single folder.Options - only `off`.
 | sourceSyncFolders         | Select     | By default, we filter out some folders like 'Deleted Items’ and 'Drafts’. Set this parameter to `All`,`Trash` to show the 'Deleted Items’ folder.Options - All,Trash.
 | sourceRawFileList         | Select     | By default, we filter out files like signature images or those winmail.dat files form the files list. Set this parameter to `off` to turn off this filtering and show every single file attachments.Options - only `off`.
-| statusCallbackUrl         | String     | If specified, we’ll make a POST request to this URL if the connection status of the source changes. 
+| statusCallbackUrl         | String     | If specified, we’ll make a POST request to this URL if the connection status of the source changes.
 
 ## ContextIO.getConnectTokenDetails
 Getting data about connect token will tell you:If the connect token was used;It not used, you will see when it will expire;If the connect token was used, you will see data about which source was added with the connect token;
@@ -211,7 +211,7 @@ Listing messages from a specific folder.Alterntively, you can also perform the f
 | consumerKey      | credentials| The consumer key from your account.
 | consumerSecret   | credentials| The consumer secret from your account.
 | accountId        | String     | Unique id of an account.
-| sourceLabel        | String     | The label property of the source instance. You can use 0 as an alias for the first source of an account.
+| sourceLabel        | String     | The label property of the source instance. You word `first` as an alias for the first source of an account.
 | folder        | String     |  The full folder path using / as the path hierarchy delimiter.
 | includeThreadSize| Select     | Set to `true` to include thread size in the result.
 | includeBody      | Select     | Set to `true` to include message bodies in the result. Since message bodies must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
@@ -245,7 +245,7 @@ This call lists all flags currently applied to this message.
 | messageId     | String     | Unique id of a message. This can be the `message_id` or `emailMessageId` property of the message. The `gmailMessageId` (prefixed with gm-) can also be used.
 
 ## ContextIO.updateMessageFlags
-This call will allow you to set or unset flags for a specific message.
+This call will allow you to set or unset flags for a specific message.To update the Messagge Flags, you must specify one of the parameters - seen,answered,flagged,deleted,draft.
 
 | Field         | Type       | Description
 |---------------|------------|----------
@@ -309,7 +309,7 @@ This endpoint returns the the entire thread of messages a message is in that Con
 | offset        | Number     | Start the list at this offset (zero-based).
 
 ## ContextIO.updateMessage
-This call allows you to copy or move a message between folders, or also change the message’s flags all at once. If there are more than one source on the account, you can use this call to copy/move the message between these sources. 
+This call allows you to copy or move a message between folders, or also change the message’s flags all at once. If there are more than one source on the account, you can use this call to copy/move the message between these sources.
 
 | Field         | Type       | Description
 |---------------|------------|----------
@@ -326,7 +326,7 @@ This call allows you to copy or move a message between folders, or also change t
 | flagDraft     | Select     | Message has not completed composition (marked as a draft). Set this parameter to `set` to set the flag, `unset` to unset it.
 
 ## ContextIO.moveMessage
-This call allows you to move a message between folders, or also change the message’s flags all at once. If there are more than one source on the account, you can use this call to copy/move the message between these sources. 
+This call allows you to move a message between folders, or also change the message’s flags all at once. If there are more than one source on the account, you can use this call to copy/move the message between these sources.
 
 | Field         | Type       | Description
 |---------------|------------|----------
@@ -349,7 +349,7 @@ List folders for a given source (email address).
 | consumerKey          | credentials| The consumer key from your account.
 | consumerSecret       | credentials| The consumer secret from your account.
 | accountId            | String     | Unique id of an account.
-| sourceLabel          | String     | The label property of the source instance. You can use 0 as an alias for the first source of an account.
+| sourceLabel          | String     | The label property of the source instance. You word `first` as an alias for the first source of an account.
 | includeExtendedCounts| Select     | Set to `include` to include extended counts in the result (for now, the only extended count supported is number of unseen messages). Since counts must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
 | noCache              | Select     | Set to `true` to fetch the folder list directly from the IMAP server. Since data must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
 
@@ -361,7 +361,7 @@ Get information about a given folder such as number of messages, number of unsee
 | consumerKey          | credentials| The consumer key from your account.
 | consumerSecret       | credentials| The consumer secret from your account.
 | accountId            | String     | Unique id of an account.
-| sourceLabel          | String     | The label property of the source instance. You can use 0 as an alias for the first source of an account.
+| sourceLabel          | String     | The label property of the source instance. You can word `first` as an alias for the first source of an account.
 | folder               | String     | The full folder path using / as the path hierarchy delimiter.
 | delimiter            | String     | If / isn’t fancy enough as a hierarchy delimiter when specifying the folder you want to obtain, you’re free to use what you want, just make sure you set this delim parameter to tell us what you’re using.
 | includeExtendedCounts| Select     | Set to `include` to include extended counts in the result (for now, the only extended count supported is number of unseen messages). Since counts must be retrieved from the IMAP server, expect a performance hit when setting this parameter.
@@ -381,8 +381,8 @@ Webhooks set at the user level are applicable only to the user on which the webh
 | filterEmailList    | List       | Check for new messages received from a given name or email address. Also accepts a comma delimited list of email addresses.
 | filterSubject      | String     | Check for new messages with a subject matching a given string or regular expression.
 | filterThread       | String     | Check for new messages in a given thread. Value can be a gmail_thread_id or the email_message_id of an existing message currently in the thread.
-| filterFileName     | String     | Check for new messages where a file whose name matches the given string is attached. 
-| filterFolderAdded  | String     | Check for messages filed in a given folder. On Gmail, this is equivalent to having a label applied to a message. The value should be the complete name (including parents if applicable) of the folder you want to track. 
+| filterFileName     | String     | Check for new messages where a file whose name matches the given string is attached.
+| filterFolderAdded  | String     | Check for messages filed in a given folder. On Gmail, this is equivalent to having a label applied to a message. The value should be the complete name (including parents if applicable) of the folder you want to track.
 | filterFolderRemoved| String     | Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.
 | filterToDomains    | List       | Check for new messages sent to a given domain. Also accepts a comma delimited list of domains.
 | filterFolderRemoved| String     | Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.
@@ -428,8 +428,8 @@ Webhooks set at the user level are applicable only to the user on which the webh
 | filterEmailList    | List       | Check for new messages received from a given name or email address. Also accepts a comma delimited list of email addresses.
 | filterSubject      | String     | Check for new messages with a subject matching a given string or regular expression.
 | filterThread       | String     | Check for new messages in a given thread. Value can be a gmail_thread_id or the email_message_id of an existing message currently in the thread.
-| filterFileName     | String     | Check for new messages where a file whose name matches the given string is attached. 
-| filterFolderAdded  | String     | Check for messages filed in a given folder. On Gmail, this is equivalent to having a label applied to a message. The value should be the complete name (including parents if applicable) of the folder you want to track. 
+| filterFileName     | String     | Check for new messages where a file whose name matches the given string is attached.
+| filterFolderAdded  | String     | Check for messages filed in a given folder. On Gmail, this is equivalent to having a label applied to a message. The value should be the complete name (including parents if applicable) of the folder you want to track.
 | filterFolderRemoved| String     | Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.
 | filterToDomains    | List       | Check for new messages sent to a given domain. Also accepts a comma delimited list of domains.
 | filterFolderRemoved| String     | Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.
@@ -464,8 +464,8 @@ Webhooks set at the application level apply to all users in your userbase.Applic
 | filterEmailList    | List       | Check for new messages received from a given name or email address. Also accepts a comma delimited list of email addresses.
 | filterSubject      | String     | Check for new messages with a subject matching a given string or regular expression.
 | filterThread       | String     | Check for new messages in a given thread. Value can be a gmail_thread_id or the email_message_id of an existing message currently in the thread.
-| filterFileName     | String     | Check for new messages where a file whose name matches the given string is attached. 
-| filterFolderAdded  | String     | Check for messages filed in a given folder. On Gmail, this is equivalent to having a label applied to a message. The value should be the complete name (including parents if applicable) of the folder you want to track. 
+| filterFileName     | String     | Check for new messages where a file whose name matches the given string is attached.
+| filterFolderAdded  | String     | Check for messages filed in a given folder. On Gmail, this is equivalent to having a label applied to a message. The value should be the complete name (including parents if applicable) of the folder you want to track.
 | filterFolderRemoved| String     | Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.
 | filterToDomains    | List       | Check for new messages sent to a given domain. Also accepts a comma delimited list of domains.
 | filterFolderRemoved| String     | Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.
@@ -509,8 +509,8 @@ Edit an existing webhook. Please note changes to an existing webhook are not app
 | filterEmailList    | List       | Check for new messages received from a given name or email address. Also accepts a comma delimited list of email addresses.
 | filterSubject      | String     | Check for new messages with a subject matching a given string or regular expression.
 | filterThread       | String     | Check for new messages in a given thread. Value can be a gmail_thread_id or the email_message_id of an existing message currently in the thread.
-| filterFileName     | String     | Check for new messages where a file whose name matches the given string is attached. 
-| filterFolderAdded  | String     | Check for messages filed in a given folder. On Gmail, this is equivalent to having a label applied to a message. The value should be the complete name (including parents if applicable) of the folder you want to track. 
+| filterFileName     | String     | Check for new messages where a file whose name matches the given string is attached.
+| filterFolderAdded  | String     | Check for messages filed in a given folder. On Gmail, this is equivalent to having a label applied to a message. The value should be the complete name (including parents if applicable) of the folder you want to track.
 | filterFolderRemoved| String     | Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.
 | filterToDomains    | List       | Check for new messages sent to a given domain. Also accepts a comma delimited list of domains.
 | filterFolderRemoved| String     | Check for messages removed from a given folder. On Gmail, this is equivalent to having a label removed from a message. The value should be the complete name (including parents if applicable) of the folder you want to track.
@@ -539,7 +539,7 @@ There are several ways you can interact with a user’s contacts.
 | consumerSecret| credentials| The consumer secret from your account.
 | accountId     | String     | Unique id of an account.
 | search        | String     | String identifying the name or the email address of the contact(s) you are looking for.
-| activeBefore  | DatePicker | Only include contacts included in at least one email dated before a given time. 
+| activeBefore  | DatePicker | Only include contacts included in at least one email dated before a given time.
 | activeAfter   | DatePicker | Only include contacts included in at least one email dated after a given time.
 | sortBy        | Select     | The field by which to sort the returned results.
 | sortOrder     | Select     | The sort order of the returned results.
@@ -684,4 +684,3 @@ Delete an oauth provider.
 | consumerKey        | credentials| The consumer key from your account.
 | consumerSecret     | credentials| The consumer secret from your account.
 | providerConsumerKey| String     | The consumer key for this external OAuth provider
-

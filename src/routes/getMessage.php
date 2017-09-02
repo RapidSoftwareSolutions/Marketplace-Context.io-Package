@@ -60,7 +60,7 @@ $app->post('/api/ContextIO/getMessage', function ($request, $response) {
         $data['include_body'] = 1;
     }
 
-    if(!empty($data['include_headers']) )
+    if(!empty($data['include_headers']) && $data['include_headers'] != 'raw')
     {
         if($data['include_headers'] == 'true')
         {

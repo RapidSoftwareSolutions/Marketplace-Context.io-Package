@@ -38,6 +38,12 @@ $app->post('/api/ContextIO/deleteSource', function ($request, $response) {
         'auth' => 'oauth'
     ]);
 
+
+    if(!empty($data['label']) && $data['label'] == 'first')
+    {
+      $data['label'] = 0;
+    }
+    
     $query_str = "https://api.context.io/2.0/accounts/{$data['id']}/{$data['label']}";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
