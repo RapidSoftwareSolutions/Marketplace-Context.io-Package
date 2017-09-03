@@ -2761,7 +2761,7 @@
         },
         {
             "name": "updateUserLevelWebhook",
-            "description": "Webhooks set at the user level are applicable only to the user on which the webhook is set. User level webhooks should be used for cases when you will be monitoring things that are very specific to each individual user.",
+            "description": "Webhooks set at the user level are applicable only to the user on which the webhook is set. User level webhooks should be used for cases when you will be monitoring things that are very specific to each individual user.To update the user webhook, you must specify one of the optional parameters.",
             "args": [
                 {
                     "name": "consumerKey",
@@ -3390,7 +3390,7 @@
         },
         {
             "name": "updateApplicationLevelWebhook",
-            "description": "Edit an existing webhook. Please note changes to an existing webhook are not appended but overwritten.",
+            "description": "Edit an existing webhook. Please note changes to an existing webhook are not appended but overwritten.To update the user webhook, you must specify one of the optional parameters.",
             "args": [
                 {
                     "name": "consumerKey",

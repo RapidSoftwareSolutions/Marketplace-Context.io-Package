@@ -412,7 +412,7 @@ Get information about a single user level webhook, such whether it is active and
 | webhookId     | String     | Unique id of a user level webhook.
 
 ## ContextIO.updateUserLevelWebhook
-Webhooks set at the user level are applicable only to the user on which the webhook is set. User level webhooks should be used for cases when you will be monitoring things that are very specific to each individual user.
+Webhooks set at the user level are applicable only to the user on which the webhook is set. User level webhooks should be used for cases when you will be monitoring things that are very specific to each individual user.To update the user webhook, you must specify one of the optional parameters.
 
 | Field              | Type       | Description
 |--------------------|------------|----------
@@ -494,7 +494,7 @@ Get information about a single application level webhook, such whether it is act
 | webhookId     | String     | Unique id of a user level webhook.
 
 ## ContextIO.updateApplicationLevelWebhook
-Edit an existing webhook. Please note changes to an existing webhook are not appended but overwritten.
+Edit an existing webhook. Please note changes to an existing webhook are not appended but overwritten.To update the user webhook, you must specify one of the optional parameters.
 
 | Field              | Type       | Description
 |--------------------|------------|----------
