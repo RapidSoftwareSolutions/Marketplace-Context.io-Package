@@ -48,9 +48,9 @@ $app->post('/api/ContextIO/createUserLevelWebhook', function ($request, $respons
     }
 
 
-    if(!empty($data['receiveDrafts']) && $data['receiveDrafts'] == 'true')
+    if(!empty($data['receive_drafts']) && $data['receive_drafts'] == 'true')
     {
-        $data['receiveDrafts'] = 1;
+        $data['receive_drafts'] = 1;
     }
 
     if(!empty($data['include_body']) && $data['include_body'] == 'true')
